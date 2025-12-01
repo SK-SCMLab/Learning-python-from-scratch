@@ -108,3 +108,76 @@ nums[0] = 5
 print(nums) # [5, 2, 3]
 ```
 To check the type of a variable is to use the built-in **isinstance()** function, which checks if a variable matches a specific data type. It takes in an object and the type you want to check it against, then returns a boolean
+
+### *How do you work with strings?*
+A string is a sequence of characters surrounded by either single or double quotation marks. In Python, they're treated equally.
+```
+my_str_1 = 'Sasi'
+my_str_2 = "Sasi"
+my_str_3 = """Sasi
+SCM"""
+my_str_4 = '''Sasi
+SCM'''
+```
+Multiple strings can be combined using **+** operator. This process is called String Concatenation
+```
+str_plus_str = my_str_1 + ' ' + my_str_2
+print(str_plus_str) # Sasi Sasi
+```
+Note that this work only with strings. If you try to concatenate a string with a number, you'll get a **TypeError**
+To fix this, you can convert the number into a string with the built-in str() function:
+```
+name = 'Sasi'
+age = 29
+
+name_and_age = name + str(age)
+print(name_and_age) # Sasi29
+```
+You can also use augmented assignment operator for concatenation
+```
+name = 'Sasi'
+age = 29
+
+name_and_age = name
+name_and_age += str(age)
+
+print(name_and_age) #Sasi29
+```
+
+Apart from regular strings, Python also has a category of string called f-strings, which is short for formatted string literals. It allows you to handle interpolation and also do some concatenation with a compact and readable syntax. F-strings start with **f** (either lowercase or uppercase) before the quotes, and allow you to embed variables or expressions inside replacement fields indicated by {}
+```
+name = 'Sasi'
+age = 29
+name_and_age = f'My name is {name} and I am {age} years old'
+print(name_and_age) # My name is Sasi and I am 29 years old
+```
+To get the length of a string, you can use built-in **len()** function
+```
+my_str = 'Sasi'
+print(len(my_str)) # 4
+```
+Each character in a string has a position called an **Index**. The index is zero-based, meaning that the index of the first character of a string is 0, the index of the second character is 1 and so on. To access a character by its index, you use [] with the index of the character you want to access inside
+```
+my_str = 'Sasi'
+print(my_str[0]) # S
+```
+Negative indexing is also allowed, so you can get the last/second-to-last character of any string
+```
+my_str = 'Sasi'
+print(my_str[-1]) # i
+```
+**String Slicing** lets you extract a portion of a string or work with only a specific part of it
+```
+my_str = 'Sasi'
+print(my_str[0:2] #Sas
+```
+Apart from the **start** and **stop** indices, there's also an optional step parameter, which is used to specify the increment between each index in the slice
+```
+my_str = 'Sasi'
+print(my_str[0:2:3] #Ssi
+```
+A helpful trick you can do with the **step** parameter is to reverse a string by setting step to -1, and leaving start and stop blank:
+```
+my_str = 'Sasi'
+print(my_str[::-1] # Isas
+```
