@@ -23,7 +23,6 @@ Follow the instructions as mentioned in the website
 ```
 name = 'Sasi'
 age = '30'
-
 ```
 2. When naming variables in Python, there are some important rules to keep in mind:
   i. Vairable names can only start with a letter or an underscore **_**, not a number
@@ -39,3 +38,73 @@ If any of these rules are broken, Python program thows a **Syntax Error**:
 # multi-line
 # comment
 ```
+
+### *How does the Print function work?*
+Every programming language has some way to output data to the terminal with a built-in method, function, property, or keyword. In python, you can use **print** function to print data to the terminal. 
+
+```
+print('Hello', 'World!)
+```
+Python automatically adds a space between each item when you separate them with commas. This is helpful when you want to print several pieces of information together
+
+### *What are the common data typs in Python and how do you get the type of a variable?*
+Python is a dynamically-typed language, meaning you don't need to explicitly declare types for variables. The language knows what data type a variable is based on what you assign to it. The dynamic-typing nature of Python makes coding really fast and more flexible, but it can also lead to unexpected bugs because type errors are detected only when a program runs, not when the program complies. 
+```
+my_integer_var = 10
+print('Integer:', my_integer_var)
+```
+```
+my_float_var = 3.3
+print('Float:', my_float_var)
+```
+```
+my_complex_var = 3 + 1j
+print('Complex:', my_complex_var)
+```
+```
+my_string_var = 'Hi'
+print('String:', my_string_var)
+```
+```
+my_boolean_var = True
+print('Boolean:', my_boolean_var)
+```
+```
+my_set_var = {1, 2, 3}
+print('Set:', my_set_var)
+```
+```
+*Dictionary is a collection of key-value pairs enclosed in curly braces*
+my_dictionary_var = {'name': 'Sasi', 'age': 29}
+print('Dictionary:', my_dictionary_var)
+```
+```
+*Tuple is an immutable ordered collection, enclosed in brackets
+my_tuple_var = (1, 2, 3)
+print('Tuple:', my_tuple_var)
+```
+```
+*Range is a sequence of number, often used in loops
+my_range_var = range(3)
+print('Range:', my_range_var)
+```
+```
+*List is an ordered collection of elements that supports different data types*
+my_list = [29, 'Sasi', 3.3, True]
+print(my_list)
+```
+```
+*None is a special value that represents the absence of a value*
+my_none_var = None
+print('None:', my_none_var)
+```
+
+In Python, all data gets treated as objects and some objects are immuatable while others are mutable. Immutable data types can't be modified or altered once they're declared. For example: String, Integer, Float, Boolean, Tuple and Range. On the other hand, you can change mutable types without giving them a new name
+
+```
+nums = [1, 2, 3]
+nums[0] = 5
+
+print(nums) # [5, 2, 3]
+```
+To check the type of a variable is to use the built-in **isinstance()** function, which checks if a variable matches a specific data type. It takes in an object and the type you want to check it against, then returns a boolean
