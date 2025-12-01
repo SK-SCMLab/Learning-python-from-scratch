@@ -17,4 +17,25 @@ https://www.python.org/
 
 Follow the instructions as mentioned in the website
 
-###
+### *How to declare variables and what are the naming conventions to name variables?*
+1. In Python, variables are like a labelled box for storing and referencing data of different types. To declare variables in Python, you need to assign a value to an identifier with the assignment **=** operator. You just need to write the name of the variable on the left, followed by the assignment operator, and the value you want to assign the variable on the right
+
+```
+name = 'Sasi'
+age = '30'
+
+```
+2. When naming variables in Python, there are some important rules to keep in mind:
+  i. Vairable names can only start with a letter or an underscore **_**, not a number
+ ii. Variables names only contain alphanumeric characters (a-z, A-Z, 0-9) and underscores(_)
+iii. Variable names are case-sensitive - age, Age, and AGE are all considered unique
+ iv. Variable names cannot be one of Python's reserved keywords such as if, class, and def
+If any of these rules are broken, Python program thows a **Syntax Error**:
+3. In Python, comments start with a pound symbol **#**, and the language ignores everything while execution after the # on that line
+
+```
+# This is a single line comment
+# This is a
+# multi-line
+# comment
+```
