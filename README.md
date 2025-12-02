@@ -265,4 +265,48 @@ my_str = 'sasi kiran'
 title_case_my_str = my_str.title()
 print(title_case_my_str) # Sasi kiran
 ```
+### *How do you work with integers and floating point numbers?*
+Integers and floats are the primary numeric data types in Python. With them, you can store numeric data and perform mathematical operations. 
+
+Integers are whole numbers without decimal points, either positive or negative
+```
+my_int_1 = 50
+my_int_2 = 2
+
+sum_ints = my_int_1 + my_int_2
+print('Integer Addition:', sum_ints) # Integer Addition: 52
+
+diff_ints = my_int_1 - my_int_2
+print('Integer difference:', diff_ints) # Integer difference: 48
+
+product_ints = my_int_1 * my_int_2
+print('Integer product:', product_ints) # Integer product: 100
+
+div_ints = my_int_1 / my_int_2
+print('Integer Division:', div_ints) # Integer Division: 25
+
+print(type(my_int_1)) # <class 'int'>
+print(type(my_int_2)) # <class 'int'>
+```
+
+Floats are decimal numbers, either positive or negative
+```
+my_float_1 = 50.5
+my_float_2 = 2.5
+
+sum_floats = my_float_1 + my_float_2
+print('Float addition:', sum_floats) # Float addition: 53
+
+diff_floats = my_float_1 - my_float_2
+print('Float difference:', diff_floats) # Float difference: 48
+
+product_floats = my_float_1 * my_float_2
+print('Float product:', product_floats) # Float product: 126.25
+
+div_floats = my_float_1 / my_float_2
+print('Float division:', div_floats) # Float division: 20.2
+
+print(type(my_float_1)) # <class 'float'>
+print(type(my_float_2)) # <class 'float'>
+```
 
