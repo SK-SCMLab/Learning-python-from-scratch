@@ -173,17 +173,17 @@ print(my_str[-1]) # i
 **String Slicing** lets you extract a portion of a string or work with only a specific part of it
 ```
 my_str = 'Sasi'
-print(my_str[0:2] #Sas
+print(my_str[0:2]) #Sas
 ```
 Apart from the **start** and **stop** indices, there's also an optional step parameter, which is used to specify the increment between each index in the slice
 ```
 my_str = 'Sasi'
-print(my_str[0:2:3] #Ssi
+print(my_str[0:2:3]) #Ssi
 ```
 A helpful trick you can do with the **step** parameter is to reverse a string by setting step to -1, and leaving start and stop blank:
 ```
 my_str = 'Sasi'
-print(my_str[::-1] # Isas
+print(my_str[::-1]) # Isas
 ```
 ### *What are some common string methods?**
 Python provides a number of built-in methods to make easy working with strings.
