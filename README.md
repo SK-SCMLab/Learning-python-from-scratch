@@ -34,6 +34,7 @@ If any of these rules are broken, Python program thows a **Syntax Error**:
 
 ```
 # This is a single line comment
+
 # This is a
 # multi-line
 # comment
@@ -113,9 +114,12 @@ To check the type of a variable is to use the built-in **isinstance()** function
 A string is a sequence of characters surrounded by either single or double quotation marks. In Python, they're treated equally.
 ```
 my_str_1 = 'Sasi'
+
 my_str_2 = "Sasi"
+
 my_str_3 = """Sasi
 SCM"""
+
 my_str_4 = '''Sasi
 SCM'''
 ```
@@ -224,5 +228,41 @@ print(starts_with_sasi) # True
 my_str = 'sasi kiran'
 ends_with_kiran = my_str.endswith(my_str)
 print(ends_with_kiran) #True
+```
+**find(substring)** returns the index of the first occurence of the substring, or -1 if it doesn't find one
+```
+my_str = 'sasi kiran'
+world_index = my_str.find('kiran')
+print(world_index) #5
+```
+**count(substring)** returns the number of times a substring appears in a string
+```
+my_str = 'sasi kiran'
+a_count = my_str.count('a')
+print(a_count) # 2
+```
+**capitalize()** returns a new string with the first character capitalized and the other characters lowercased
+```
+my_str = 'sasi kiran'
+capitalize_my_str = my_str.capitalize()
+print(capitalize_my_str) #Sasi kiran
+```
+**isupper()** returns *true* if all letters in the string are uppercase and *false* if not
+```
+my_str = 'sasi kiran'
+is_all_upper = my_str.isupper()
+print(is_all_upper) # False
+```
+**islower()** returns *true* if all letters in the string are lowercase and *false* if not
+```
+my_str = 'sasi kiran'
+is_all_lower = my_str.islower()
+print(is_all_lower) # True
+```
+**title()** returns a new string with the first letter of each word capitalized
+```
+my_str = 'sasi kiran'
+title_case_my_str = my_str.title()
+print(title_case_my_str) # Sasi kiran
 ```
 
