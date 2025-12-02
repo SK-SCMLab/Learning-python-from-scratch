@@ -386,3 +386,127 @@ print(hexa_representation) #0x32
 result_1 = pow(2,3)
 print(result_1) # 8
 ```
+### *How do augmented assignments work?**
+Augmented assignment combines binary operation with an assignment in one step. It takes a variable, applies an operation to it with another value, and stores the result back into the same variable. The advantage of augmented assignment is that it provides a concise and readable way to update a variable value without repeating the variable name. In turn, it reduces redundancy and potential errors that might arise from a typo or something similar
+```
+count = 14
+count -= 3
+print(count) #11
+
+product = 7
+product *= 3
+print(product) #21
+
+price = 4
+price /= 2
+print(price) #2
+
+total_pages = 24
+total_pages //= 7
+print(total_pages) #3
+
+bits = 51
+bits %= 2
+print(bits) #1
+
+power = 2
+power **= 3
+print(power) #8
+```
+You can use only addition and multiplication augmented assignments for strings. Other augmented assignments will throw **TypoError** during compilation
+```
+greet ='Hello'
+greet += 'World'
+print(greet) #Hello World
+
+greet = 'Hi'
+greet *= 3
+print(greet) #HiHiHi
+```
+### *How do functions work in Python?*
+Functions are reusable pieces of code that run when you call them. Python also come with some built-in functions like **print()**. Another helpful built-in function is **input()** which prompts the user for input
+```
+name = input('What is your name?') # User types Sasi and clicks ENTER
+print('Hello', name) # Hello Sasi
+```
+To write own custom functions, you use the **def** keyword, followed by the name you want to give your function, a pair of parentheses and colon
+```
+def sasi_python():
+```
+In Python, code blocks are determined by indentation. Python style guide recommends using four spaces to determine each level of indentation
+```
+def calculate_sum(a, b):
+    print(calculate_sum)
+```
+Here a, b which are represented in parantheses are called **Parameters**. To use the parameters, you have to pass in **Arguments**. Arguments are the values you pass to a function when you call it
+```
+calculate_sum(3, 5) #8
+```
+Functions also use special **return** keyword to exit the function and return a value. If you don't explicitly use it, Python will return **None** by default
+```
+def calculate_sum(a, b):
+    print(a + b)
+
+my_sum = calculate_sum(3, 5)
+print(my_sum) #None
+
+def calculate_sum(a, b):
+    return a + b
+
+my_sum = calculate_sum(3, 5)
+print(my_sum) #8
+```
+### *What is scope in Python and how does it work?**
+In Python, scope determines the point at which you can access a variable. It's what controls the lifetime of a variable and how it resolved in different parts of the code. To determine the scope, Python follows the **LEGB** rule:
+1. **Local Scope (L)**: Variables defined in functions or classes
+2. **Enclosing Scope (E)**: Variables defined in enclosing or nested functions
+3. **Global Scope (G)**: Variables defined at the top level of the module or file
+4. **Built-in Scope (B)**: Reserved names in Python for predefined functions, modules, keywords, and objects
+
+**Local Scope** means that the variable declared inside a function or class can only be accessed within that function or class. In this case, my_func() has its own scope which cannot be accessed from outside the function 
+```
+def my_func()
+  my_var = 3 # Locally scoped to my_func()
+  print(my_var) #3
+my_func #3
+print(my_var) # NAME ERROR: name 'my_var' is not defined
+```
+**Enclosing Scope** means that a function that's nested inside another function can access the variables of the function it's nested within. The inner function can easily access the variable defined in the outer function. However, note that the outer functions cannot access variables defined within any nested functions
+```
+def outer_func():
+    msg = 'Hi, Sasi!'
+    res = "" # Declare res in the enclosing loop
+
+    def inner_func():
+        nonlocal res  # Allow modification in the enclosing variable
+        res = 'How are you?'
+        print(msg) # Accessing 'msg' from outer function
+
+    inner_func()
+    print(res) # Now res is accessible and modified
+
+outer_func()
+```
+```
+Output:
+# Hi, Sasi!
+# How are you?
+```
+**Global Scope** refers to variables that are declared outside any functions or classes which can be accessed from anywhere in the program. You can also use **global** keyword to modify a global variable
+```
+my_var_1 = 7
+
+def show_vars():
+    global my_var_2
+    my_var_2 = 10
+    print(my_var_1)
+    print(my_var_2)
+
+show_vars() # 7 10
+```
+
+
+
+
+
+
