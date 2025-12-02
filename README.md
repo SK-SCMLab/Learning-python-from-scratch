@@ -22,7 +22,7 @@ Follow the instructions as mentioned in the website
 
 ```
 name = 'Sasi'
-age = '30'
+age = 30
 ```
 2. When naming variables in Python, there are some important rules to keep in mind:
   i. Vairable names can only start with a letter or an underscore **_**, not a number
