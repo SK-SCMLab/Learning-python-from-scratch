@@ -351,3 +351,38 @@ my_float_2 = 2.5
 exp_floats = my_float_1 ** my_float_2
 print('Float exponentiation:', exp_floats) # Float exponentiation: 18122.93
 ```
+Python also provides built-in functions for converting either numeric data or strings into integers or floats.
+```
+my_int_1 = 50
+my_float_1 = int(my_int_1)
+print(my_float_1) # 50.0
+
+my_float_1 = 50.5
+my_int_1 = int(my_float_1)
+print(my_int_1) #50
+
+my_float_1 = 50.456
+round_my_float = round(my_float_1)
+print(round_my_float) #50.5
+
+my_num = -3
+abs_num = abs(my_num)
+print(abs_num) #3
+
+my_num = 50
+binary_representation = bin(my_num)
+print(binary_representation) #0b110010
+
+my_num = 50
+octal_representation = oct(my_num)
+print(octal_representation) #0o62
+
+my_num = 50
+hexa_representation = hex(my_num)
+print(hexa_representation) #0x32
+```
+**pow()** raises a number to the power of another or performs modular exponentiation
+```
+result_1 = pow(2,3)
+print(result_1) # 8
+```
