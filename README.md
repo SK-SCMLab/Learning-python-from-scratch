@@ -609,6 +609,25 @@ else:
 Output:
 # Access denied for non-administrators
 ```
+**isinstance()** function in Python is used to check if the object of an instance of a specified class or a tuple of classes. The all() and any() functions are used to evaluate iterables of boolean values. Combining these allows for powerful type checking with collectibles
+```
+data = [1, 2, 3, 4]
+if all(isinstance(item, int) for item in data):
+    return 'All elements are integers'
+
+mixed_data = ['Sasi', 1, 0.8]
+if not all(isinstance(item, int) for item in mixed_data):
+    return 'Not all elements are integers'
+```
+```
+mixed_list = ['Sasi', 1, 0.8]
+if any(isinstance(item, str) for item in mixed_data):
+    return 'There is at least one string in the list'
+
+data = [10, 20, 30]
+if not any(isinstance(item, str) for item in data:
+    return 'There is no strings in the list'
+```
 
 
 
