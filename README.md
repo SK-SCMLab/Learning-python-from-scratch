@@ -504,6 +504,113 @@ def show_vars():
 
 show_vars() # 7 10
 ```
+### *How do conditional statements and logical operations work?*
+Conditional statements or conditionals, let you control the flow of your program based on whether certain conditions are *true* or *false*. 
+```
+Equal (=)
+Not Equal (!=)
+Greater than (>)
+Less than (<)
+Greater than or equal to (>=)
+Less than or equal to (<=)
+```
+In Python, the most basic conditional is the **if** statement.
+1. If statements start with *if* keyword
+2. Condition is an expression that evaluates to *True* or *False*, followed by colon
+3. The indentation specifies the block of code within the body of *if* statement
+```
+if condition:
+```
+When you want to print something while *if* clause is not true, **else** clause comes into play. 
+```
+if condition:
+else:
+```
+There might also be situations where you want to account for multiple conditions. To do that, Python lets you to extend you if statement with **elif** keyword
+```
+if condition1:
+elif condition2:
+else:
+```
+**Example**
+```
+age = 29
+
+if age >= 65:
+    print('You are a senior citizen')
+elif age >= 30:
+    print('You are an adult in your prime)
+elif age >= 18:
+    print('You are a young adult')
+elif age >= 13:
+    print('You are a teenager')
+elif age >=3:
+    print('You are a toddler')
+else:
+    print('You are a toddler or an infant')
+```
+```
+Output:
+# You are a young adult
+```
+### *What are Truthy and Falsy values, and how do Boolean operators and short-circuiting work?*
+While conditional statements and comparison operators are very powerful, you will often run into situations where you need to compare multiple values at once. This can lead to nested conditional statements
+```
+is_citizen = True
+age = 29
+
+if is_citizen:
+    if age >= 18
+    print('You are eligible to vote')
+else:
+  print('You are not eligible to vote')
+```
+```
+Output:
+# You are eligible to vote
+```
+In Python, every value has an inherent boolean value, or a built-in sense of whether it should be treated as *True* or *False* in a logical context. Many values are considered **Truthy**, i.e., they evaluate to *True* in a logical context. Others are **Falsy**, i.e., they evaluate to *False*
+```
+Few falsy values:
+1. None
+2. False
+3. Integer 0
+4. Float 0.0
+5. Empty Strings ""
+```
+Additionally, there are three Boolean operators in Python: **and**, **or**, **not**
+```
+is_citizen = True
+age = 25
+
+if is_citizen and age >= 18
+    print('You are eligible to vote')
+else:
+    print('You are not eligible to vote')
+
+if is_citizen or age >= 18
+    print('You are eligible to vote')
+else:
+    print('You are not eligible to vote')
+```
+```
+Output:
+# You are eligible to vote
+```
+```
+is_admin = False
+
+if not is_admin:
+    print('Access denied for non-administrators')
+else:
+    print('Welcome administrator!')
+```
+```
+Output:
+# Access denied for non-administrators
+```
+
+
 
 
 
