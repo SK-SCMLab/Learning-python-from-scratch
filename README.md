@@ -309,4 +309,45 @@ print('Float division:', div_floats) # Float division: 20.2
 print(type(my_float_1)) # <class 'float'>
 print(type(my_float_2)) # <class 'float'>
 ```
+A modular operator **%** returns the reminder when the value on the left is divided by the value on right
+```
+my_int_1 = 50
+my_int_2 = 2
 
+mod_ints = my_int_1 % my_int_2
+print('Integer modulus:', mod_ints) # Integer modulus: 0
+
+my_float_1 = 50.5
+my_float_2 = 2.5
+
+mod_floats = my_float_1 % my_float_2
+print('Float modulus:', mod_floats) # Float modulus: 20.2
+```
+**Floor Division (//)** divides two numbers and returns the greatest integer less than or equal to the result
+```
+my_int_1 = 50
+my_int_2 = 4
+
+floor_div_ints = my_int_1 // my_int_2
+print('Integer floor division:', floor_div_ints) # Integer floor division: 12
+
+my_float_1 = 50.2
+my_float_2 = 4.4
+
+floor_div_floats = my_float_1 // my_float_2
+print('Float floor division:', floor_div_floats) # Float floor division: 11
+```
+**Exponentiation** raises a number to the power of another, and is done with **(**)
+```
+my_int_1 = 50
+my_int_2 = 2
+
+exp_ints = my_int_1 ** my_int_2
+print('Integer exponentiation:', exp_ints) # Integer exponentiation: 2500
+
+my_float_1 = 50.5
+my_float_2 = 2.5
+
+exp_floats = my_float_1 ** my_float_2
+print('Float exponentiation:', exp_floats) # Float exponentiation: 18122.93
+```
