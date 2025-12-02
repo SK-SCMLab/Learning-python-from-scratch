@@ -181,3 +181,48 @@ A helpful trick you can do with the **step** parameter is to reverse a string by
 my_str = 'Sasi'
 print(my_str[::-1] # Isas
 ```
+### *What are some common string methods?**
+Python provides a number of built-in methods to make easy working with strings.
+```
+my_str = 'sasi'
+uppercase_my_str = my_str.upper()
+print(uppercase_my_str) # SASI
+```
+```
+my_str = 'SASI'
+lowercase_my_str = my_str.lower()
+print(lowercase_my_str) #sasi
+```
+**Strip()** returns a new string with the specified leading and trailing characters removed. If no argument is passed, it removes leading and trailing whitespace
+```
+my_str = '  sasi  '
+trimmed_my_str = my_str.strip()
+print(trimmed_my_str) # "sasi"
+```
+```
+my_str = 'sasi'
+replace_my_str = my_str.replace('sasi', 'kiran')
+print(replace_my_str) #kiran
+```
+```
+my_str = 'sasi kiran'
+split_words = my_str.split()
+print(split_words) # ['sasi', 'kiran']
+```
+**Join(iterable)** joins elements of an iterable into a string with a separator
+```
+my_list = ['sasi', 'kiran']
+joined_my_str = ' '.join(my_list)
+print(joined_my_str) # sasi kiran
+```
+```
+my_str = 'sasi kiran'
+starts_with_sasi = my_str.startswith(my_str)
+print(starts_with_sasi) # True
+```
+```
+my_str = 'sasi kiran'
+ends_with_kiran = my_str.endswith(my_str)
+print(ends_with_kiran) #True
+```
+
