@@ -644,8 +644,8 @@ cities[-1] # Bengaluru
 ```
 Another way to create a list is to use the **list()** constructor. It is used to convert an iterable into a list
 ```
-developer = 'Sasi'
-list(developer) #['S', 'a', 's', 'i']
+consultant = 'Sasi'
+list(consultant) #['S', 'a', 's', 'i']
 ```
 An iterable is a special type of object that can be looped over one item at a time. 
 To get the total number of elements in a list, you can use **len()** function
@@ -660,6 +660,12 @@ supply_chain_management[0] = 'Warehousing'
 print(supply_chain_management) # ['Warehousing', 'Logistics', 'Manufacturing', 'Inventory']
 ```
 Since lists are mutable, you can update any element in the list as long as you pass in a valid index number
+If you want to remove an element from a list, you can use **del** keyword:
+```
+consultant = ['Sasi', 29, 'SCM consultant']
+del consultant[1]
+print(consultant) # ['Sasi', 'SCM consultant']
+```
 
 
 
