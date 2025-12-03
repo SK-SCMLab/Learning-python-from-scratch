@@ -698,7 +698,24 @@ Similar to strings, you can use slice operator **:** to access portions of a lis
 ```
 consultant[0:1] #['Sasi', 29]
 ```
+### *What are the common methods used for lists?*
+**append()** used to add an item to the end of the list.
+```
+numbers = [1, 2, 3, 4, 5]
+numbers.append(6)
+print(numbers) #[1, 2, 3, 4, 5, 6]
 
+even_numbers = [8, 10, 12, 14]
+numbers = append(even_numbers)
+print(numbers) #[1, 2, 3, 4, 5, 6, [8, 10. 12, 14]]
+
+numbers = extend(even_numbers)
+print(numbers) #[1, 2, 3, 4, 5, 6, 8, 10, 12, 14]
+```
+
+
+
+```
 
 
 
