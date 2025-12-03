@@ -659,15 +659,27 @@ supply_chain_management = ['Supply Chain', 'Logistics', 'Manufacturing', 'Invent
 supply_chain_management[0] = 'Warehousing'
 print(supply_chain_management) # ['Warehousing', 'Logistics', 'Manufacturing', 'Inventory']
 ```
-Since lists are mutable, you can update any element in the list as long as you pass in a valid index number
+Since lists are mutable, you can update any element in the list as long as you pass in a valid index number. If you pass in an index (either positive or negative) that is out of bounds for the list, then you will receive an **IndexError**
 If you want to remove an element from a list, you can use **del** keyword:
 ```
 consultant = ['Sasi', 29, 'SCM consultant']
 del consultant[1]
 print(consultant) # ['Sasi', 'SCM consultant']
 ```
-
-
+Sometimes it is helpful to check if an element is inside the list. To do that, you can use **in** keyword
+```
+supply_chain_management = ['Supply Chain', 'Logistics', 'Manufacturing', 'Inventory']
+'Manufacturing' in supply_chain_management #True
+'Marketing' in supply_chain_management #False
+```
+Sometimes it is common to have lists nested inside of other lists. To access the nested list, you need to access it using primary index followed by secondary index
+```
+consultant = ['Sasi', 29, ['Inventory Management', 'Digital Manufacturing', 'Lean Six Sigma management']]
+developer[2][0] # Inventory Management
+```
+Unpacking values from a list is a technique used to assign values from a list to new variables. 
+```
+consultant = 
 
 
 
