@@ -708,14 +708,44 @@ print(numbers) #[1, 2, 3, 4, 5, 6]
 even_numbers = [8, 10, 12, 14]
 numbers = append(even_numbers)
 print(numbers) #[1, 2, 3, 4, 5, 6, [8, 10. 12, 14]]
-
+```
+**extend()** is similar to append() but you can add multiple items from one list to another
+```
 numbers = extend(even_numbers)
 print(numbers) #[1, 2, 3, 4, 5, 6, 8, 10, 12, 14]
 ```
-
-
-
+**insert()** accepts two arguments: the index where you wish to insert the new item and the item you want to insert
 ```
+numbers.insert(2, 2.5)
+print(numbers) # [1, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 14]
+```
+**remove()** will remove the duplicate number from the list
+```
+numbers.remove(3, 4, 5)
+print(numbers) #[1, 2, 2.5, 6, 8, 10, 12, 14]
+```
+To remove an element at the specific index in the list, use **pop()** method
+```
+numbers.pop(2)
+print(numbers) #[1, 2, 6, 8, 10, 12, 14]
+
+numbers.pop()
+print(numbers) #[1, 2, 6, 8, 10, 12]
+```
+**clean()** empties the list
+```
+numbers.clear()
+print(numbers) #[]
+```
+**sort()** is used to sort elements in place
+```
+numbers = [19, 1, 7, 11, 25]
+numbers.sort()
+
+print(numbers) #[1, 7, 11, 19, 25]
+```
+
+
 
 
 
