@@ -628,7 +628,38 @@ data = [10, 20, 30]
 if not any(isinstance(item, str) for item in data:
     return 'There is no strings in the list'
 ```
-
+----
+## 🧒🏻 Loops & Sequences
+### *What are lists and how do they work?*
+The list data type is an ordered sequence of elements that can be compromised of strings, numbers, or even other lists. Lists are mutable and use zero-based indexing, meaning that the first element of the list is at index zero
+To access an element from the list, you can reference its index number in the sequence
+```
+cities = ['Hyderabad', 'Mumbai', 'Bengaluru']
+cities[0] # Hyderabad
+```
+Negative indexing is used to access elements from the end of the list instead of beginning at index **0**. To access the last element of any list, you can use **-1**
+```
+cities = ['Hyderabad', 'Mumbai', 'Bengaluru']
+cities[-1] # Bengaluru
+```
+Another way to create a list is to use the **list()** constructor. It is used to convert an iterable into a list
+```
+developer = 'Sasi'
+list(developer) #['S', 'a', 's', 'i']
+```
+An iterable is a special type of object that can be looped over one item at a time. 
+To get the total number of elements in a list, you can use **len()** function
+```
+numbers = [1, 2, 3, 4, 5]
+len(numbers) # 5
+```
+If you wanted to update a value at a particular index:
+```
+supply_chain_management = ['Supply Chain', 'Logistics', 'Manufacturing', 'Inventory']
+supply_chain_management[0] = 'Warehousing'
+print(supply_chain_management) # ['Warehousing', 'Logistics', 'Manufacturing', 'Inventory']
+```
+Since lists are mutable, you can update any element in the list as long as you pass in a valid index number
 
 
 
