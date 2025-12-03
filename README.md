@@ -679,7 +679,25 @@ developer[2][0] # Inventory Management
 ```
 Unpacking values from a list is a technique used to assign values from a list to new variables. 
 ```
-consultant = 
+consultant = ['Sasi', 29, 'SCM Consultant']
+name, age, job = consultant
+
+print(name) #Sasi
+print(age) #29
+print(job) #SCM Consultant
+```
+If you need to collect any remaining elements from the list, you can use the asterisk **(*)** symbol
+```
+consultant = ['Sasi', 29, 'SCM Consultant']
+name, *rest = consultant
+
+print(name) #Sasi
+print(rest) #[29, 'SCM Consultant]
+```
+Similar to strings, you can use slice operator **:** to access portions of a list
+```
+consultant[0:1] #['Sasi', 29]
+```
 
 
 
