@@ -1,0 +1,24 @@
+#--------------------------------------------------------------------------------------
+########################### USER STORIES ##############################################
+#--------------------------------------------------------------------------------------
+# 1. As a Warehouse Operations Manager I want the system to ensure that the number of orders requested is greater than zero so that the inventory planning is based on meaningful demand quantities
+# 2. As a Fulfillment system, I want to automatically generate a clean sequence of order IDs from 1 through n so that each order has a unique identifier that is predictable and easy to track
+# 3. As a Supply Chain analyst, I want the system to validate that the order count entered is an integer so that incorrect data types (like text or decimals) do not cause errors in the order generation process
+# 4. As a Logistics coordinator, I want a standardized order ID format so that downstream systems (like WMS or TMS) can parse the output without failures
+#--------------------------------------------------------------------------------------
+
+########################## TEST CASES ##################################################
+# You should have a generate_order_ids function. The function should have only one parameter n
+def generate_order_ids(n):
+# Validate integer output
+    if not isinstance(n, int):
+        return "Argument must be an integer value."
+# Reject non-positive integers
+    if n <= 0:
+        return "Argument must be an integer greater than 0"
+
+# Build consistent order ID pattern
+    result = ""
+    for i in range(i, n + 1):
+        result += f"ORDER-{i} "
+    return result.strip()
