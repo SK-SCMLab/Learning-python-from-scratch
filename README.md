@@ -949,6 +949,19 @@ numbers = [3, 2, 1, 0]
 total = sum(numbers)
 print(total) #6
 ```
+### *What are Lamda functions and how do they work?*
+Lambda functions are anonymous and are great when you need to use them in higher order functions. Both regular functions and lambda functions have their use cases in Python. If you are dealing with single inline expressions, then you might consider using a lambda function
+```
+def square(num):
+    return num ** 2
+print(square(4)) # 16
+--------------------------
+lambda num: num ** 2
+--------------------------
+numbers = [1, 2, 3, 4, 5]
+even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
+print(even_numbers)
+```
 
 
 
