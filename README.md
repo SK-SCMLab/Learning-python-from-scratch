@@ -1,5 +1,5 @@
 # 🐍 LEARNING PYTHON FROM SCRATCH
-My personal knowledge hub — a GitHub-hosted notebook containing Python notes, experiments, cheat sheets, workflows, and topic-wise summaries. Organized cleanly, version-controlled, and updated as I learn new concepts
+My personal knowledge hub — a GitHub-hosted notebook containing Python notes, experiments, workflows, and topic-wise summaries. Organized cleanly, version-controlled, and updated as I learn new concepts
 
 ---
 
