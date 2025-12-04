@@ -920,5 +920,35 @@ For the above code, there is a more concise way to write that uses list comprehe
 even_numbers = [num for num in range(21) if num % 2 == 0]
 print(even_numbers)
 ```
+```
+numbers = [1, 2, 3, 4, 5]
+result = [(num, 'Even') if num % 2 == 0 else (num, 'Odd') for num in numbers]
+print(result) # [(1, 'Odd'), (2, 'Even'), (3, 'Odd'), (4, 'Even'), (5, 'Odd')]
+```
+Another way to create a list starting from an existing iterable is **filter()** function. It is used to select elements from an iterable that meet a specific condition. It accepts a function and an iterable for its arguments
+```
+words = ['green', 'blue', 'brown', 'olive green', 'white', 'yellow']
+
+def is_long_word(word):
+      return len(word) > 5
+
+long_words = list(filter(is_long_word, words))
+print(long_words) #['olive green', 'yellow']
+```
+Similarly **map()** function takes an iterable and applies a function to each of its elements
+```
+celsius = [0, 10, 20, 30, 40]
+def to_fahrenheit(temp):
+    return (temp * 9/5) + 32
+fahrenheit = list(map(to_fahrenheit, celsius))
+print(fahrenheit) #[32.0, 50.0, 68.0, 86.0, 104.0]
+```
+**sum()** function is also used to get the sum from an iterable like a list or tuple
+```
+numbers = [3, 2, 1, 0]
+total = sum(numbers)
+print(total) #6
+```
+
 
 
