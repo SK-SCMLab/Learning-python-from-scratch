@@ -836,6 +836,18 @@ for course in courses:
     else:
         print(f"'{course}' has no vowels")
 ```
+### *What are ranges and how can you use them in the loops?*
+The **range()** function is used to generate a sequence of integers. The *start* argument represents the start of the range, if not specified, the default is 0. The required *stop* argument is an integer that represents the end point for the sequence of numbers being generated. By default, the sequence of integers will increment by 1. But if you want to change that default, then you can use the optional *step* argument. Range() function only accepts integers as arguments, not floats. 
+```
+for num in range(1, 10, 2):
+  print(num) # [1, 3, 5, 7, 9]
+```
+Alternatively, range() function can create a list of integers by using it with the list() constructor. It is used to convert the iterable into a list
+```
+numbers = list(range(1, 10, 2)
+print(numbers) #[1, 3, 5, 7, 9]
+```
+
 
 
 
