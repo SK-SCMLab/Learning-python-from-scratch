@@ -744,6 +744,39 @@ numbers.sort()
 
 print(numbers) #[1, 7, 11, 19, 25]
 ```
+In contrast to sort() method, there is **sorted()** function which works for any iterable and returns a new sorted list instead of modifying the original list
+```
+numbers = [19, 1, 7, 11, 25]
+sorted_numbers = sorted(numbers)
+
+print(numbers) # [19, 1, 7, 11, 25]
+print(sorted_numbers) # [1, 7, 11, 19, 25]
+```
+**reverse()** method will reverse a list of elements
+```
+numbers = [6, 5, 4, 3, 2, 1]
+numbers.reverse()
+print(numbers) #[1, 2, 3, 4, 5, 6]
+```
+**index()** is used to find the first index where an element can be found in a list. If the specified item within index() function cannot be found, then Python raises a **ValueError**
+```
+consultant = ['Sasi', 29, 'SCM Consultant']
+consultant.index('SCM Consultant') # 2
+```
+### *What are tuples and how do they work?**
+A tuple is a Python data type used to create a ordered sequence of values. Tuples can contain a mixed set of data types
+```
+consultant = ('Sasi', 29, 'SCM Consultant')
+```
+Tuples are similar to lists, but while lists are a mutable data type, tuples are immutable. This means that the elements in a tuple cannot be changed once it's created. If you try to update/delete one of the items in the tuple, you will get a **TypeError**
+### *What are some common methods for Tuples?*
+**count()** is used to determine how many times an item appears in a tuple. Arguments are expected to be passed into the count() method. If the specified item is count() function is not present at all in the tuple, then the return value is 0. If no arguments are passed into the count(), then Python raises a **TypeError**
+```
+consultant = ['Sasi', 29, 'SCM Consultant']
+consultant.count('Sasi') #1
+consultant.count('engineer') # 0
+```
+
 
 
 
