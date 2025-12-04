@@ -847,10 +847,78 @@ Alternatively, range() function can create a list of integers by using it with t
 numbers = list(range(1, 10, 2)
 print(numbers) #[1, 3, 5, 7, 9]
 ```
+### *What are the enumerate and zip functions and how do they work?*
+To keep track of the index for each element: one option is to create an index variable and increment it by 1 for each iteration of the loop
+```
+courses = ['Logistics', 'Operations', 'Marketing', 'Finance', 'Accounting']
+index = 0
+for course in courses:
+    print(f'Index {index} and course{courses}')
+    index += 1
+```
+While that works, an even easier way to do that is by using **enumerate()** function. This function keeps track of the index for an iterable and returns an enumerate object
+```
+courses = ['Logistics', 'Operations', 'Marketing', 'Finance', 'Accounting']
+for index, course in enumerate(courses):
+    print(f'Index {index} and course{course})
+```
+**Output**
+```
+Index 0 and course Logistics
+Index 1 and course Operations
+Index 2 and course Marketing
+Index 3 and course Finance
+Index 4 and course Accounting
+```
+This function also accepts an optional *start* argument that specifies the starting value for the count. If this argument is omitted, then the count will begin at 0. It is used to iterate over one list
+```
+courses = ['Logistics', 'Operations', 'Marketing', 'Finance', 'Accounting']
+for index, course in enumerate(courses, 1):
+    print(f'Index{index} and course{course})
+```
+**Output**
+```
+Index 1 and course Operations
+Index 2 and course Marketing
+Index 3 and course Finance
+Index 4 and course Accounting
+```
+**zip()** function which combines lists into paris of elements and returns an iterator of tuples is used to iterate over multiple iterables in parallel
+```
+courses = ['Logistics', 'Operations', 'Marketing', 'Finance', 'Accounting']
+ids = [1, 2, 3, 4, 5]
+list(zip(course, ids)) #[('Logistics', 1), ('Operations', 2), ('Marketing', 3), ('Finance', 4), ('Accounting', 5)]
 
-
-
-
-
+for name, id in zip(courses, ids):
+    print(f'Name:{name})
+    print(f'ID:{id}')
+```
+**Output**
+```
+Name: Logistics
+ID: 1
+Name: Operations
+ID: 2
+Name: Marketing
+ID: 3
+Name: Finance
+ID: 4
+Name: Accounting
+ID: 5
+```
+The enumerate() and zip() functions are very powerful, and when combined with loops, can make your code much more concise
+### *What are list competencies and what are some useful functions to work with Lists?*
+```
+even_numbers = []
+for num in range(21):
+    if num % 2 == 0:
+       even_numbers.append()
+print(even_numbers)
+```
+For the above code, there is a more concise way to write that uses list comprehension instead. List comprehension allows you to create a new list in a single line by combining a loop and condition directly within square brackets. This makes code shorter and often easier to read
+```
+even_numbers = [num for num in range(21) if num % 2 == 0]
+print(even_numbers)
+```
 
 
