@@ -776,7 +776,66 @@ consultant = ['Sasi', 29, 'SCM Consultant']
 consultant.count('Sasi') #1
 consultant.count('engineer') # 0
 ```
+Similary index(), sorted(), reverse() methods can also be used on tuples
+### *How do loops work?*
+**for** loop is used to iterate through a list and print each item to the console. It can also used to iterate through other iterables like a string. **for** loops can also be nested
+```
+experience = ['Capgemini', 'ITC Infotech', 'Reliance Retail', 'AIG']
+qualifications = ['B.Tech', 'MBA']
 
+for exp in experience:
+  for eligibility in qualifications:
+    print(exp, eligibility)
+```
+In the above example, the outer loop will iterate through each exp in the experience list. For each exp, the inner loop will iterate through each eligibility in the qualifications
+
+**while** loop will repeat a block of code until the code is False. 
+```
+secret_number = 3
+guess = 0
+
+while guess != secret_number:
+    guess = int(input('Guess the number (1-5))
+    if guess != secret_number:
+        print('Wrong! Try again')
+
+print('You got it!')
+```
+In the above example, we have a *secret_number* variable with the value of 3 and an initial guess of 0. Then we use the input function to get input from the user, then convert the input string into and integer with the int() function, and assign it to the guess variable. If the user guesses correctly by inputting 3, the while loop is broken out of and the message 'You got it!' is printed to the console. Otherwise, the message 'Wrong! Try again' is printed in the console, and the loop repeats.
+
+The **break** statement is used to stop the execution of a loop
+```
+consultant_names = ['AB', 'CD', 'EF', 'GH']
+
+for consultant in consultant_names:
+    if consultant == 'EF':
+        break
+    print(consultant)
+```
+In the example, we iterate through a list of consultant_names and print each name to the console. If the name is equal to 'EF', then we break out of the loop. This results in only the names ['AB', 'CD'] being printed to the console
+
+The **continue** statement is used to skip the current iteration of a loop and move onto the next iteration
+```
+consultant_names = ['AB', 'CD', 'EF', 'GH']
+
+for consultant in consultant_names:
+    if consultant == 'EF':
+        continue
+    print(consultant)
+```
+Now the result in the console will be different. The names ['AB', 'CD', 'GH'] are printed because the continue statement skips the second iteration of the loop when consultant name is equal to 'EF', and does not print that name to the console
+Both *for* and *while* loops can be combined with an *else* clause, which is executed only when the loop is not terminated by a *break* statement
+```
+courses = ['Logistics', 'Operations', 'Marketing', 'Finance', 'Accounting']
+
+for course in courses:
+    for letter in course:
+      if letter.lower() in 'aeiou':
+      print(f"'{course}' contains the vowel '{letter'}")
+      break
+    else:
+        print(f"'{course}' has no vowels")
+```
 
 
 
