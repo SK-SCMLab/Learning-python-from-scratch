@@ -1,0 +1,54 @@
+** start of main.py **
+
+full_dot = '●'
+empty_dot = '○'
+
+# Test 1
+def create_character(name, strength, intelligence, charisma):
+
+# Test 2
+    if not isinstance(name, str):
+        return 'The character name should be a string'
+
+# Test 3
+    if len(name) > 10:
+        return 'The character name is too long'
+
+# Test 4
+    if " " in name:
+        return 'The character name should not contain spaces'
+
+    stats = [strength, intelligence, charisma]
+
+# Test 5
+    if not all(isinstance(stat, int) for stat in stats):
+        return 'All stats should be integers'
+# Test 6
+    if any(stat < 1 for stat in stats):
+        return 'All stats should be no less than 1'
+
+# Test 7
+    if any(stat > 4 for stat in stats):
+        return 'All stats should be no more than 4'
+
+# Test 8
+    if sum(stats) != 7:
+        return 'The character should start with 7 points'
+
+# Test 9
+    strength_full = full_dot * strength
+    strength_empty = (10-strength)* empty_dot
+    intell_full = full_dot * intelligence
+    intell_empty = (10-intelligence)* empty_dot
+    rizz_full = full_dot * charisma
+    rizz_empty = (10-charisma)* empty_dot
+
+    
+    return f"{name}\nSTR {strength_full}{strength_empty}\nINT {intell_full}{intell_empty}\nCHA {rizz_full}{rizz_empty}"
+
+    character = create_character("ren", 4, 1, 2)
+
+    print(character)
+
+** end of main.py **
+
