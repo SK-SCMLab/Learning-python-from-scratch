@@ -1015,6 +1015,76 @@ pizza = {
           'total_time': 25
         }
 ```
+### *What are the common techniques to loop over a dictionary?*
+You can loop over a dictionary if you need to access and process its key-value pairs. This is helpful for updating their values or applying some logic to them
+```
+products = {
+      'Laptop': 990,
+      'Smartphone': 600,
+      'Tablet': 250,
+      'Headphones': 70,
+}
+```
+The .values(), .keys(), .items() methods are essential for these techniques. You can use these view objects in **for** loops to iterate over the elements
+```
+for price in products.values():
+  print(price)
+# 990 600 250 70
 
+for product in products.keys():
+  print(product)
+# Laptop smartphone Tablet Headphones
 
+for product in products.items():
+  print(product)
+# ('Laptop', 990) ('Smartphone', 600) ('Tablet', 250) ('Headphones', 70)
 
+for product, price in products.items():
+  print(product, price)
+# Laptop 990 Smartphone 600 Tablet 250 Headphones 70
+```
+For example, if we want to offer a 20% discount across all the products, we would multiple each prices by 0.8 and reassign it as the value of that product key
+```
+products = {
+    'Laptop': 990,
+    'Smartphone': 600,
+    'Tablet': 250,
+    'Headphones': 70,
+}
+for product, price in products.items():
+    products[product] = round(price * 0.8)
+print(products)
+```
+**Output**
+```
+{
+  'Laptop': 792,
+  'Smartphone': 480,
+  'Tablet': 200,
+  'Headphones': 56
+}
+```
+If you need to iterate over the key-value pairs while keeping track of a counter, you can call the enumerate() function. This counter essentially acts as a sort of "index" or "count" for that element within the loop. But enumerate() function also assigns an integer to each key, so we get tuples with the integer and the key
+```
+for product in enumerate(products):
+    print(product)
+```
+**Output**
+```
+(0, 'Laptop')
+(1, 'Smartphone')
+(2, 'Tablet')
+(3, 'Headphones')
+```
+You can also use loop variables to determine the index value
+```
+for index, price in enumerate(products.values()):
+    print(index, price)
+```
+**Output**
+```
+0 990
+1 600
+2 250
+3 70
+```
