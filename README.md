@@ -962,6 +962,59 @@ numbers = [1, 2, 3, 4, 5]
 even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
 print(even_numbers)
 ```
+## 🧑🏻 Dictionaries and sets
+### *What are dictionaries and how do they work?*
+In Python, dictionaries are built-in data structures that store collections of key-value pairs. They work very similarly to real dictionaries, where you search for a word to find its corresponding meaning. With Python dictionaries, you can use a key to find its corresponding value. You should use dictionaries when you need to associate values to unique keys. This is helpful when you need to find a value fast based on the key, and when you need to represent structured data. First, we find the variable that holds the dictionary. You don't necessarily need to assign the dictionary to a variable, but it's very common to do this to keep it in a memory and use it later in the code. Then that's followed by curly braces, containing key-value pairs. Each key is associated with a value, so you can use the key to access that value. After each value, except the last one, there's a comma to separate different key-value pairs. Keys must be unique in the dictionary, and they must be an immutable data type. However, the values can be repeated, and they can be of any data type
+```
+pizza = {
+    'name': 'Margherita Pizza',
+    'price': 8.9,
+    'calories_per_slice': 250,
+    'toppings': ['mozzarella', 'basil']
+}
+```
+Alternatively, **dict()** constructor can be used which builds the dictionary from a sequence of key-value pairs. We pass a list of tuples as argument to the dict() constructor. These tuples contain the key as the first element and the value as the second element
+```
+pizza = dict([('name', 'Margherita Pizza'), ('price', 8.9), ('calories_per_slice', 250), ('toppings', ['mozzarella', 'basil'])])
+```
+Dictionaries also have helpful methods to perform common operations. The **.get()** method retrieves the value associated with a key. It's similar to the bracket notation that we just used, but it's advantage is that you can set a default value, so you won't get an error if the key doesn't exist.
+```
+pizza.get('toppings', []) #['mozzarella', 'basil']
+```
+The **.keys()** and **.values()** methods return a view object with all the keys and values in the dictionary, respectively:
+```
+pizza.keys()
+#dict_keys(['name', 'price', 'calories_per_slice'])
+
+pizza.values()
+#dict_values(['Margherita Pizza', 8.9, 250])
+```
+The **.items()** method returns a view object with all the key-value pairs in the dictionary, including both the keys and the values:
+```
+pizza.items()
+#dict_items([('name', 'Margherita Pizza'), ('price', 8.9), ('calories_per_slice', 250)])
+```
+The **.clear()** method removes all the key-value pairs from the dictionary
+```
+pizza.clear()
+```
+The **.pop()** method removes the key-value pair with the key that you specify as the first argument and return its value. If the key doesn't exist, it returns the default value that you specify as the second argument. If the key doesn't exist and you don't pass a default value, a **KeyError** is raised
+In recent Python versions, **.popitem()** method removes the last inserted item
+```
+pizza.pop('price', 10)
+pizza.popitem()
+```
+The **.update()** method updates the key-value pairs with the key-value pairs of another dictionary. If they have keys in common, their values are overwritten
+```
+pizza.update({'price': 15, 'total_time': 25})
+pizza = {
+          'name': 'Margherita Pizza',
+          'price': 15,
+          'calories_per_slice': 250,
+          'toppings': ['mozzarella', 'basil']
+          'total_time': 25
+        }
+```
 
 
 
