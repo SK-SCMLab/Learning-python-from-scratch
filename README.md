@@ -1088,3 +1088,41 @@ for index, price in enumerate(products.values()):
 2 250
 3 70
 ```
+### *What are sets, and how do they work?*
+Sets are one of Python's built-in data structures. One of the core characteristics of sets is that they don't store duplicate values. Sets are mutable and unordered, which means that their elements are not stored in any specific order, so you cannot use indices or keys to access them. They can only contain values of immutable data types like numbers, strings, and tuples. And they support mathematical set operations, including union, intersection, difference, and symmetric difference. To define an empty set, you must use the **set()** function. 
+```
+my_set = {1, 2, 3, 4, 5}
+```
+Methods such as:
+- .add(): pass the new element as argument
+- .remove(): pass in the element that you want to remove as argument. It will raise **KeyError** if the element is not found
+- .discard(): pass in the element that you want to remove as argument. It will not raise **KeyError** if the element is not found
+- .clear(): removes all the elements from the set
+- .issubset() & .issuperset(): check if a set is a subset or superset of another set, respectively
+- .isdisjoint(): checks if two sets are disjoint, which means they don't have any elements in common
+```
+my_set.add(6) # {1, 2, 3, 4, 5, 6}
+my_set.remove(4) #{1, 2, 3, 5, 6}
+my_set.discard(7) #
+my_set.clear() #{}
+
+my_set = {1, 2, 3, 4, 5, 6, 7}
+your_set = {3, 4, 5}
+print(your_set.issubset(my_set)) # False
+print(my_set.issuperset(your_set)) # True
+print(my_set.isdisjoint(your_set)) # False
+```
+Operators such as:
+- Union (|): returns a new set with all the elements from both sets
+- Intersection (&): returns a new set with only the elements that the sets have in common
+- Difference (-): returns a new set with the elements of the first set that are not in the other sets
+- Symmetric difference (^): returns a new set with the elements that are either on the first or the second set, but not both
+```
+my_set = {1, 2, 3, 4, 5, 6}
+your_set = {4, 5, 6, 7}
+my_set | your_set #{1, 2, 3, 4, 5, 6, 7}
+my_set & your_set # {4, 5, 6}
+my_set - your_set #{1, 2, 3}
+my_set ^ your_set #{1, 2, 3, 7}
+```
+
