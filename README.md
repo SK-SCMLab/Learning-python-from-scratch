@@ -1092,6 +1092,7 @@ for index, price in enumerate(products.values()):
 Sets are one of Python's built-in data structures. One of the core characteristics of sets is that they don't store duplicate values. Sets are mutable and unordered, which means that their elements are not stored in any specific order, so you cannot use indices or keys to access them. They can only contain values of immutable data types like numbers, strings, and tuples. And they support mathematical set operations, including union, intersection, difference, and symmetric difference. To define an empty set, you must use the **set()** function. 
 ```
 my_set = {1, 2, 3, 4, 5}
+my_set = set([1, 2, 3, 4, 5, 6])
 ```
 Methods such as:
 - .add(): pass the new element as argument
