@@ -1125,4 +1125,31 @@ my_set & your_set # {4, 5, 6}
 my_set - your_set #{1, 2, 3}
 my_set ^ your_set #{1, 2, 3, 7}
 ```
+### *What is the Python Standard Library, and how do you import a module?*
+In software development, a library is like a toolbox for developers. Python has an extensive standard library with many difficult built-in modules. They're all standardized, well-vetted solutions for many of the problems and tasks you'll face daily as a programmer, such as:
+- Interacting with the operating system
+- Working with files
+- Networking
+- Working with date & time
+- Performing mathematical operations
+- Using regular expressions
+- Testing and debugging your code
+- Etc.
+Modules such as:
+- math(): Helpful for functions for performing more complex mathematical operations
+- random(): helpful for generating random numbers
+- re(): used for working with regular expressions
+- datetime(): helpful for working with dates and times
+**import()** statement let you import modules into your Python script. Import statements work exactly the same for functions, classes, constants, variables, and any other elements defined in the module
+**as** is used to import the module with a different name
+**__name__** is a special built-in variable in Python. When the Python file is executed directly, it sets the value of this variable to the string "__main__". It contains the code that you want to run only if the Python script is running as the main program
+```
+if __name__ == '__main__':
+    #code
+```
+But if the script is imported as a module, the code with in the block doesn't run. It serves two purposes: They can be run directly to execute their main logic, or they can be imported into another module without executing their main logic
+
+
+
+
 
