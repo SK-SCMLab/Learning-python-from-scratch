@@ -1,0 +1,87 @@
+#------------------------------------------------------------------------------------------------------------------
+#################################### USER STORIES #################################################################
+#------------------------------------------------------------------------------------------------------------------
+# 1. As a data engineer, I want the system to accept only a list (or tuple) of dictionaries so that malformed payloads are rejected before ingestion
+# 2. As a downstream customer, I want each shipment record to contain exactly the required keys so that analytics and downstream jobs don't break
+# 3. As a supply planner, I want fields validated to business constraints
+# - shipment_id: SHP\d+
+# - sku: SKU-[A-Z0-9]+
+# - quantity: positive integer
+# - origin/destination: non-empty strings and not equal
+# - transport_mode: road|rail|air|sea
+# - dispatch_date: YYYY-MM-DD and a valid date
+# 4. As an operator, I want actionable error messages that say which record and which field failed
+#------------------------------------------------------------------------------------------------------------------
+###################################### TEST CASES #################################################################
+#------------------------------------------------------------------------------------------------------------------
+import re
+# Helper: validate individual shipment fields
+def find_invalid_shipment_fields (
+        shipment_id,
+        sku,
+        quantity,
+        origin,
+        destination,
+        transport_mode,
+        dispatch_date
+):
+    constraints = {
+        'shipment_id': isinstance(shipment_id, int) and re.fullmatch('SHP\d+', shipment_id),
+        'sku': isinstance(sku, str) and re.fullmatch('SKU-[A-Z0-9]+', sku),
+        'quantity': isinstance(quantity, int) and quantity > 0,
+        'origin': isinstance(origin, str) and origin != '',
+        'destination': isinstance(destination, str) and destination != '' and destination != origin,
+        'transport_mode': isinstance(transport_mode, str) and transport_mode.lower() in ('road', 'rail', 'air', 'sea'),
+        'dispatch_date': isinstance(dispatch_date, str) and re.fullmatch('\\d{4}-\\d{2}-\\d{2}', dispatch_date)
+    }
+    
+    # return only invalid keys
+    return [key for key, value in constraints.items() if not value]
+
+# Main validator
+def validate_shipments(data):
+    required_keys = {
+        'shipment_id',
+        'sku',
+        'quantity',
+        'origin',
+        'destination',
+        'transport_mode',
+        'dispatch_date'
+    }
+    
+    # Test case 1: Input is not a list or tuple -> should print error and return False
+    if not isinstance(data, (list, tuple)):
+        print("Invalid format: expected a list or tuple.")
+        return False
+    
+    is_invalid = False
+
+    for index, record in enumerate(data):
+
+        # Test case 2: Item inside list is not a dictionary
+        if not isinstance(record, dict):
+            print(f"Invalid format: expected a dictionary at position {index}.")
+            is_invalid = True
+            continue
+        
+        # Test case 3: Dictionary keys do not match required keys
+        if set(record.keys()) != required_keys:
+            print(f"Invalid format: {record} at position {index} has missing and/or invalid keys.")
+            is_invalid = True
+            continue
+        
+        # Validate individual fields
+        invalid_fields = find_invalid_shipment_fields(**record)
+
+        # Test case 4: Individual field validation errors
+        for field in invalid_fields:
+            print(f"Unexpected format '{field}: {record[field]}' at position {index}.")
+            is_invalid = True
+    
+    if is_invalid:
+        return False
+    
+    # Test case 5: All records valid
+    print("Valid supply chain data.")
+    return True
