@@ -1,0 +1,87 @@
+#------------------------------------------------------------------------------------------------------
+#################################### CASE STUDY ######################################################
+#------------------------------------------------------------------------------------------------------
+# Build a Digital Manufacturing Configuration Manager that allows engineers to manage machine production parameters such as setup time, cycle time, throughput, and maintenance status
+#------------------------------------------------------------------------------------------------------
+#################################### USER STORIES ####################################################
+# 1. All parameter keys and values must be lowercase
+# 2. Manufacturing parameters are stored in a dictionary
+# Allowed parameters: setup_time, cycle_time, throughput, maintenance
+# 4. You should define a function named "add_parameter" with two parameters representing:
+# i. a dictionary of parameters
+# ii. a tuple containing a key-value pair
+
+## add_parameter function should:
+# 1. Convert the key and value to lowercase
+# 2. If the parameter exists, return "Parameter '[key]' already exists! Cannot add a new parameter with this name."
+# 3. If the parameter does not exist, add it to the dictionary and return "Parameter '[key]' added with value '[value]' successfully"
+# 4. Returned messages must contain lowercase key and value
+
+## update_parameter function should:
+# 1. Convert key and value to lowercase
+# 2. If the parameter exists, update its value and return "Parameter '[key]' updated to '[value]' successfully!"
+# 3. If the parameter does not exist, return "Parameter '[key]' does not exist! Cannot update a non-existing parameter"
+
+## delete_parameter function should:
+# 1. Convert the key to lowercase
+# 2. If the parameter exists, delete it and return "Parameter '[key]' deleted successfully!"
+# 3. If the parameter does not exist, return "Parameter not found!"
+
+## view_parameter function should:
+# 1. Return No manufacturing parameters available, if dictionary is empty
+# 2. If not empty, return a formatted string
+# 3. Capitalize the first letter of each parameter name
+# 4. End the output with a newline character
+#---------------------------------------------------------------------------------------------------------------------
+# Test 1: Create a dictionary named machine_parameters
+machine_parameters = {
+        'setup_time': '30 mins',
+        'cycle_time': '45 secs'
+}
+
+# Test 2: Define a function "add_parameter". Function should have two parameters
+def add_parameter(parameters, parameter):
+# Convert key and value to lowercase
+    key, value = parameter
+    key = key.lower()
+    value = value.lower()
+# Handle duplicate parameter error
+    if key in parameters:
+        return f"Parameter '{key}' already exists! Cannot add a new parameter with this name."
+    
+    parameters[key] = value
+    return f"Parameter '{key}' added with value '{value}' successfully!"
+
+# Test 3: Define a function "update_parameter". 
+def update_parameter(parameters, parameter):
+# Convert key and value to lowercase
+    key, value = parameter
+    key = key.lower()
+    value = value.lower()
+# Handle non-existing update
+    if key not in parameters:
+        return f"Parameter '{key}' does not exists! Cannot update a non-existing parameter."
+
+    parameters[key] = value
+    return f"Parameter '{key}' added with value '{value}' successfully!"
+
+# Test 4: Define a function "delete_parameter"
+def delete_parameter(parameters, key):
+    key = key.lower()
+
+    if key not in parameters:
+        return "Parameter not found!"
+    
+    del parameters[key]
+    return f"Parameter '{key}' deleted successfully!"
+
+# Test 5: Define a function "view_parameter"
+def view_parameter(parameters):
+    if not parameters:
+        return "No manufacturing parameters available."
+    
+    result = "Current manufacturing parameters:\n"
+    for key, value in parameters.items():
+        result += f"{key.capitalize()}: {value}\n"
+    
+    return result
