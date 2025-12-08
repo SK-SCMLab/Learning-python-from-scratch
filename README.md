@@ -1153,7 +1153,7 @@ But if the script is imported as a module, the code with in the block doesn't ru
 ## 👦🏻 Understanding Error Handling
 ### *What are some common error messages in Python?*
 When writing Python code, it's common to run into errors. Understanding these errors is key to debugging your code quickly and efficiently. These messages tell you exactly what went wrong, if you know how to read them. Common Python errors include *SyntaxError, NameError, TypeError, IndexError, and AttributeError*. These occur when Python doesn't understand your code, or when your logic doesn't match the data you're working with.
-````
+```
 print("Hello, world!"
 # SyntaxError: unexpected EOF while parsing
 
@@ -1171,9 +1171,9 @@ num = 42
 num.append(5)
 # AttributeError: 'int' object has no attribute 'append'
 ```
-Recognizing common Python error messages helps you fix problems faster. Instead of guessing, read the error message carefully, it often tells you exactly what went wrong and where to look
-### *What are some good debugging techniques in Python?*
+Recognizing common Python error messages helps you fix problems faster. Instead of guessing, read the error message carefully, it often tells you exactly what when wrong and where to look
 
+### *What are some good debugging techniques in Python?*
 
 
 
