@@ -1272,6 +1272,64 @@ try:
 except ZeroDivisionError as e:
     print(f'Error occurred: {e}')
 ```
+### *What is the Raise statement and how does it work?*
+In Python, the **raise** statement is a powerful tool that allows you to manually trigger exceptions in your code. It gives you control over when an how errors are generated, enabling you to create custom error conditions and enforce specific program behavior. The **raise** statement is used to explicitly throw an exception at any point in your program, allowing you to signal that error condition has occurred or that certain requirements haven't been met. 
+```
+def check_age(age):
+    if age < 0:
+        raise ValueError('Age cannot be negative')
+    return age
+
+try:
+    check_age(-5)
+except ValueError as e:
+    print(f'Error: {e}') # Error: Age cannot be negative
+```
+This statement (without arguments) can also be used to re-raise the current exception, which is particularly useful in exception handling
+```
+def process_data(data):
+    try:
+        result = int(data)
+        return result * 2
+    except ValueError:
+          print('Logging: Invalid data received')
+          raise # Re-raises the same ValueError
+try:
+    process_data('abc')
+except ValueError:
+    print('Handled at higher level')
+```
+It allows you to log or perform cleanup while still propagating the error up the call stack
+```
+class InsufficientFundsError(Exception):
+    def __init__(self, balance, amount):
+        self.balance = balance
+        self.amount = amount
+        super().__init__(f'Insufficient funds: ${balance} available, ${amount} requested')
+
+def withdraw(balance, amount):
+    if amount > balance:
+        raise > InsufficientFundsError(balance, amount)
+    return balance - amount
+
+try:
+    new_balance = withdraw(100, 150)
+except InsufficientFundsError as e:
+    print(f'Transaction failed: {e}')
+```
+It can also be used with the **from** keyword to chain exceptions, showing the relationship between different errors
+```
+def parse_config(filename):
+    try:
+        with open(filename, 'r') as file:
+              data = file.read()
+              return int(data)
+    except FileNotFoundError:
+      raise ValueError('Configuration file is missing') from None
+    except ValueError as e:
+      raise ValueError('Invalid configuration format') from e
+config = parse_config('config.txt')
+```
 
 
 
