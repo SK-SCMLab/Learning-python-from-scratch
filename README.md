@@ -1172,7 +1172,7 @@ num.append(5)
 # AttributeError: 'int' object has no attribute 'append'
 ```
 Recognizing common Python error messages helps you fix problems faster. Instead of guessing, read the error message carefully, it often tells you exactly what went wrong and where to look
-
+### *What are some good debugging techniques in Python?*
 
 
 
