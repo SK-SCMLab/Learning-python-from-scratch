@@ -1174,6 +1174,62 @@ num.append(5)
 Recognizing common Python error messages helps you fix problems faster. Instead of guessing, read the error message carefully, it often tells you exactly what when wrong and where to look
 
 ### *What are some good debugging techniques in Python?*
+Debugging is an essential skills for any Python developer. Understanding foundational techniques can help you identify and fix issues efficiently. Debugging is the process of identifying and resolving errors or bugs in your code. It involves examining the code, understanding the flow, and using tools to pinpoint the source of problems
+First, using the **print()** function and f-strings at various points in your code can help you understand the flow and state of variables. F
+```
+def add(a, b):
+    result = a + b
+    print(f'Adding {a} and {b} gives {result}')
+    return result
+```
+Next, you can utilize Python's built-in **pdb** module for interactive debugging: 
+```
+import pdb
+def divide(a, b):
+    pdb.set_trace()
+    return a / b
+
+print(divide(10, 2))
+```
+By setting the trace with **.set_trace()** method, you can step through the code, inspect variables, and understand the program's behavior
+If you want to look at the type of elements throughout your code at that moment, you can use the **whatis** command
+```
+(Pdb) whatis a
+<class 'int'>
+(Pdb) whatis divide
+Function divide
+```
+Many Integrated Development Environments (IDEs) offer advanced debugging tools, such as breakpoints, step execution, and variable inspection
+#### Using VS Code Debugger
+If you use VS code, you can set breakpoints in your code and run the debugger to pause execution at those points. 
+**Step 1**: Set up your code => Create a file called main.py with the following content
+```
+def divide(a, b):
+    result = a / b
+    return result
+print(divide(10, 2))
+print(divide(15, 3))
+```
+**Step 2**: Set a breakpoint
+1. Click in the gutter (left margin) next to line 2 (result = a / b) to set a breakpoint
+2. A red dot will appear, indicating the breakpoint is set
+**Step 3**: Start debugging
+1. Press **F5** or go to Run > Start Debugging
+2. Select "Python File" when prompted
+3. The debugger will pause execution at your breakpoint
+**Step 4**: Inspect variables
+- Hover over variables to see their current values
+- Use the variables panel on the left to see all local variables
+- Use the Debug Console at the bottom to evaluate expressions
+**Step 5**: Step through code
+  Use the debug toolbar to:
+  - **Continue(F5)**: Resume execution until the next breakpoint
+  - **Step Over (F10)**: Execute the current line and move to the next
+  - **Step Into (F11)**: Enter into function calls
+  - **Step Out(Shift+F11)**: Exit the current function
+IDE debugging tools provide a visual interface to examine the state of your program, making it easier to identify and fix issues compared to using print statements alone
+print() statements for quick checks, pdb for interactive exploration, and IDE debuggers for visual inspection
+
 
 
 
