@@ -1256,6 +1256,22 @@ finally:
 ```
 **else** runs if no exception is raised in the try block
 **finally** runs no matter what - whether or not exception occurred. Useful for clean-up tasks like closing files or releasiong resource
+```
+try:
+    number = int('abc')
+    result = 10 / number
+except ValueError:
+    print('That was not a valid number.')
+except ZeroDivisionError:
+    print("Can't divide by zero.")
+```
+By using separate **except** clauses, you can make your error responses more specific and useful. You can also use the exception object, which is typically aliased to another name with the **as** keyword
+```
+try:
+    x = 1 / 0
+except ZeroDivisionError as e:
+    print(f'Error occurred: {e}')
+```
 
 
 
