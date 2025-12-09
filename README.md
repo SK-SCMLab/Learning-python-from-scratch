@@ -1343,5 +1343,38 @@ except AssertionError as e:
 ```
 The **raise** statement is essential for creating robust applications where you need to enforce business rules, validate input, and provide meaningful error messages. By strategically using this, you can make your code more predictable and easier to debug, while giving users clear feedback about what went wrong
 
+----
+## 👨🏻 Classes and Objects
+### *How do classes work and how do they differ from objects?*
+In Python, classes and objects work hand in hand to organize and manage data. You build a class to define shared behavior, then create objects that use those behaviors. In other words, a class is like a blueprint or template you use to create objects with.
+To create a class, you use the **class** keyword followed by the name of the class and a colon. Then within the class, you can add an initializer, along with any attributes and methods. Attributes are like variables within a class, and are used to store data. Methods are functions defined within a class, and are the actions objects created with a class can perform
+```
+class ClassName:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
+    def sample_method(self):
+        print(self.name.upper())
+```
+- class **ClassName** is made up of the **class** keyword to create a class, followed by the name of the class, here called **ClassName**. It is common in Python to use the **PascalCase** convention when naming classes
+- **def__init__(self, name, age) is the special method automatically called when a new object is created. It initializes the attributes of the objects that will be created with the class. In addition to that, the first parameter **__init__** is always a reference to the specific object being created or used. By convention, this parameter is named **self**, but technically, you can use any name. **self** lets you access the object's own attributes and methods
+- **self.name = name** and **self.age = age** are the attributes the objects will have
+- **def sample_method(self):** is the method each object created can call
+- **print(self.name.upper())** is what the **sample_method** method will do, in this case, it prints the name in uppercase
+```
+class Dog:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
+    def bark(self):
+        print(f{self.name.upper()} says woof woof! I'm {self.age} years old!")
+
+dog_1 = Dog("Jack", 3)
+dog_2 = Dog("Thatcher", 5)
+
+#Call the bark method
+dog_1.bark() #JACK says woof woof! I'm 3 years old!
+dog_2.bark() #THATCHER says woof woof! I'm 5 years old!
+```
