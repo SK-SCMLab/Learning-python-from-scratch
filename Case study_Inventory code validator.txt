@@ -1,0 +1,146 @@
+#---------------------------- PROBLEM STATEMENT -------------------------------------
+# An inventory item code (IIC) uniquely identifies products in a warehouse system
+# Each inventory code:
+# 1. Has fixed length (8 or 12 digits)
+# 2. Uses the last digit as the check digit
+# 3. The check digit is derived from the remaining digits
+#----------------------------- USER STORIES -----------------------------------------
+# 1. Fix the IndentationError
+# 2. Handle missing comma (IndexError)
+# 3. Display "Enter comma-separated values"
+# 4. Handle non-numeric length (ValueError)
+# 5. Display "Length must be a number"
+# 6. Fix off-by-one error
+# 7. Fix TypeError for valid codes
+# 8. Fix IndexError for valid codes
+# 9. Handle invalid characters in item code 
+# 10. Display "Invalid character was found"
+# 11. 48215937,8 → Valid Inventory Code
+# 12. 482159374512,12 → Valid Inventory Code
+# 13. 48215936,8 → Invalid Inventory Code
+# 14. Length mismatch messages
+# 15. Invalid length message
+#------------------- PART - 1 BUGGY STARTER CODE --------------------------
+#def validate_item_code(item_code, length):
+#Indentation error
+#if len(item_code) != length:
+#printf(f"Inventory-{length} code should be {length} digits long.")
+#return
+
+#main_digits = item_code[0: length]
+#check_digit = item_code[length]
+
+#digits = [int(d) for d in main_digits]
+
+#if length == 8:
+#expected = calculate_check_digit_8(digits)
+#else:
+#expected = calculate_check_digit_12(digits)
+
+#if check_digit == expected:
+#print("Valid inventory code.")
+#else:
+#print("Invalid inventory code.")
+
+#def calculate_check_digit_8(digits):
+#total = 0
+#for i, d in enumerate(digits):
+#result = 9 - total % 9
+#return str(result)
+
+#def calculate_check_digit_12(digits):
+#total = 0
+#for i, d in enumerate(digits):
+#if i % 2 == 0:
+#total += d
+#else:
+#total += d * 3
+#result = 10 - total % 10
+#return str(result)
+
+#def main():
+#user_input = input("Enter item code and length: ")
+
+#values = user_input.split(",")
+#item_code = values[0]
+#length = int(values[1])
+
+#if length == 8 or length == 12:
+#validate_item_code(item_code, length)
+#else:
+#print("Length should be 8 or 12.")
+#main()
+#----------------- BUG-FIX mapping---------------------
+#1. Indentation error => Fix block indentation
+#2. Off-by-one slicing => length-1 for main digits
+#3. IndexError => safe slicing
+#4. TypeError => correct data types
+#5. ValueError (characters) => try/except
+#6. Missing comma => split() inside try/except
+#7. Non-numeric length => Handle int() conversino
+#8. Wrong continuation => return after errors
+#------------------ FULLY FIXED SOLUTION -------------------
+def calculate_check_digit_8(digits):
+    total = 0
+    for index, digit in enumerate(digits):
+        total += digit * (8 - index)
+    
+    result = 9 - total % 9
+    return result
+
+def calculate_check_digit_12(digits):
+    total = 0
+    for index, digit in enumerate(digits):
+        if index % 2 == 0:
+            total += digit
+        else:
+            total += digit * 3
+    
+    result = 10 - total % 10
+    return "0" if result == 10 else str(result)
+
+def validate_item_code(item_code, length):
+    if len(item_code) != length:
+        print(f"Inventory-{length} code should be {length} digits")
+        return
+
+    main_digits = item_code[:length-1]
+    given_check_digit = item_code[length-1]
+
+    try:
+        digits = [int(d) for d in main_digits]
+    except ValueError:
+        print("Invalid character was found.")
+        return
+    
+    if length == 8:
+        expected = calculate_check_digit_8(digits)
+    else:
+        expected = calculate_check_digit_12(digits)
+    
+    if given_check_digit == expected:
+        print("Valid Inventory code.")
+    else:
+        print("Invalid Inventory code.")
+
+def main():
+    user_input = input("Enter item code and length: ")
+
+    try:
+        item_code, length = user_input.split(",")
+    except ValueError:
+        print("Enter comma-separated values.")
+        return
+    
+    try:
+        length = int(length)
+    except ValueError:
+        print("Length must be a number.")
+        return
+    
+    if length in (8, 12):
+        validate_item_code(item_code, length)
+    else:
+        print("Length should be 8 or 12")
+    
+#main()
