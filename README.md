@@ -1428,4 +1428,100 @@ Apart from **__add__**, **__init__()** is another special method you'll see and 
 => **__iter__()** to loop through the items in the cart so you can see them
 => **__contains__()** to check if a specific item is in the cart
 => **__getitem__()** to return or display an item at a specific index in the cart
+### *How to handle object attributes dynamically?*
+For example, a car would normally have a brand and model. The brand and model could make attributes for a **Car** class
+But sometimes, you might not know which attributes you need until your program is running. Imagine you're writing a script that receives attribute names from a user or a configuration file. Those are not attributes you can hardcode ahead of time. That's where handling attributes dynamically comes in. 
+Python gives you four handy built-in functions to dynamically work with object attributes. They are **getattr(), setattr(), hasattr(), and delattr()**
+- **getattr()** makes it possible to read an attribute from an object when you don't know its name until runtime. If the attribute doesn't exist, it raises an **AttributeError**, unless you provide a default value. The real power of this attribute is apparent when the attribute name comes from a variable, such as from user input or some file
+```
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+person = Person('Sasi Kiran', 29)
+print(getattr(person, 'name')) # Sasi Kiran
+print(getattr(person, 'age')) # 29
+print(getattr(peroson, 'city', 'Hyderabad')) # Hyderabad
+```
+This is exactly where dynamic attribute handling shines. It lets your code respond to input and data it hasn't seen before. 
+- **setattr()** function lets you create a new attribute or update an existing one dynamically
+```
+class Configuration:
+    pass
+
+# Data loaded at runtime (like from a config or env file)
+settings_data = {
+    'server_url': 'https://api.example.com',
+    'timeout_sec': 33,
+    'max_retries': 5
+}
+config_obj = Configuration()
+
+#Dynamically set attributes using dictionary keys and values
+for attr_name, attr_value in settings_data.items():
+    setattr(config_obj, attr_name, attr_value)
+
+print(config_obj.server_url) # https://api.example.com
+print(config_obj.timeout_sec) # 33
+```
+- Before you do something with an attribute or delete it, it's a good practice to check if it exists. That's what **hasattr()** lets you do. It checks if an attribute exists and returns **True** or **False** based on the result
+```
+class Product
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+
+product_a = Product('T-shirt', 27)
+
+required_attributes = ['name', 'price', 'inventory_id']
+
+for attr in required_attributes:
+    if not hasattr(product_a, attr):
+        print(f"ERROR: Product is missing the required attribute: '{attr}'")
+    else:
+      # Access the attributes dynamically once their existence is confirmed
+      print(f'{attr}: {getattr(product_a, attr)}')
+```
+**Output**
+```
+# name: T-shirt
+# price: 27
+# ERROR: Product is missing the required attribute: 'inventory_id'
+```
+- **delattr()** lets you remove an attribute dynamically
+```
+class UserSession:
+    def __init__(self, user_id, token):
+      self.user_id = user_id
+      self.auth_token = token # sensitive
+      self.temp_counter = 0 # temporary
+
+session = UserSession(101, 'a1b2c3d4e5')
+
+# List of attributes to remove dynamically before "saving" the session
+attributes_to_clean = ['auth_token', 'temp_counter']
+
+# Dynamically remove specified attributes
+for attr in attributes_to_clean:
+    if hasattr(session, attr):
+        delattr(session, attr)
+        print(f'Removed attribute: {attr}')
+
+print('\nFinal attributes remaining:')
+
+# Loop through the remaining attributes with dir()
+for attr in dir(session):
+    # Ignore dunder methods like __init__ or __str__ and regular methods
+    if not attr.startswith('__') and not callable(getattr(session, attr)):
+      print(f'  - {attr}: {getattr(session, attr)}')
+```
+**Output**
+```
+# Removed attribute: auth_token
+# Removed attribute: temp_counter
+
+# Final attributes remaining:
+# - user_id: 101
+```
 
