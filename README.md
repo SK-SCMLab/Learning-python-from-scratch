@@ -1378,3 +1378,54 @@ dog_2 = Dog("Thatcher", 5)
 dog_1.bark() #JACK says woof woof! I'm 3 years old!
 dog_2.bark() #THATCHER says woof woof! I'm 5 years old!
 ```
+In summary, the difference between a class and an object is that a class is the template or the blueprint, and an object is what is created using that template. Also, a class defines what data and behavior the object should have, and an object holds the actual data and uses that behavior. You write a class once, and you can make many objects from it, each with different data
+### *What are methods and attributes, and how do they work?*
+Attributes are variables that belong to an object, so they hold data. There are two kinds of attributes: instance attributes and class attributes. Instance attributes are unique to each object created from a class, and you usually set them with the **__init__** method. Class attributes, on the other hand, belong to the class itself and are shared by all instances of that class
+```
+class Dog:
+    species = "German Shepherd" #Class attribute
+
+    def __init__(self, name):
+        self.name = name #Instance attribute
+
+print(Dog.species) #German Shepherd
+
+dog1 = Dog("Germy")
+print(dog1.name) #Germy
+print(dog1.species) #German Shepherd
+
+dog2 = Dog("Tom")
+print(dog2.name) #Tom
+print(dog2.species) #German Shepherd
+```
+Methods are functions defined inside a class. With them, any object defined from a class can perform actions that operate on or modify its own data. You also access a method with dot notation
+For example, **Car** class can have a **describe** method
+```
+class Car:
+    def __init__(self, color, model):
+        self.color = color #Instance attribute
+        self.model = model #Instance attribute
+
+    def describe(self):
+        return f"This car is a {self.color} {self.model}"
+
+car_1 = Car("red", "Toyota Corolla")
+car_2 = Car("green", "Lamborgini Revuelto")
+
+print(car_1.describe()) # This car is a red Toyota Corolla
+print(car_2.describe()) # This car is a green Lamborgini Revuelto
+```
+### *What are special methods and what are they used for?**
+Special methods in Python, alos known as "magic methods" or "dunder methods", are special Python methods that start and end with double underscores (__). The word "dunder" itself comes from double underscores (**d** for double, **under** for underscores)
+Apart from **__add__**, **__init__()** is another special method you'll see and use the most, as it's class initializer. There are also others like **__len__()** and **__str__()**
+
+- Arithmetic operations: **__add__(), __sub__(), __mul__(), __truediv__()**
+- String operations: **__add__(), __mul__(), __format__(), __str__(), __repr__()**
+- Comparison operations: **__eq__(), __lt__(), __gt__()**
+- Iteration operations: **__iter__(), __next__()**
+
+=> **__len__()** to get the length of the items in the cart
+=> **__iter__()** to loop through the items in the cart so you can see them
+=> **__contains__()** to check if a specific item is in the cart
+=> **__getitem__()** to return or display an item at a specific index in the cart
+
