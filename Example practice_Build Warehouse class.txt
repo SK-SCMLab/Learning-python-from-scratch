@@ -1,0 +1,32 @@
+class Warehouse:
+    def __init__(self, name, warehouse_type, location):
+        # Type validation
+        if not isinstance(name, str) or not isinstance(warehouse_type, str) or not isinstance(location, str):
+            raise TypeError("name, warehouse_type, and location must be non-empty strings")
+        
+        #Empty string validation
+        if name == "" or warehouse_type == "" or location == "":
+            raise ValueError("name, warehouse_type, and location must be non-empty strings")
+        
+        #Assign instance attributes
+        self.name = name
+        self.warehouse_type = warehouse_type
+        self.location = location
+    
+    def operate(self):
+        return f"{self.name} warehouse is operating in {self.location}..."
+    
+    def __str__(self):
+        return f"{self.name} warehouse is operating in {self.location}..."
+
+warehouse_1 = Warehouse("Central Hub", "Distribution", "Dubai")
+warehouse_2 = Warehouse("Fresh store", "Cold storage", "Amsterdam")
+warehouse_3 = Warehouse("Bulk Depot", "Fulfillment", "Singapore")
+
+print(warehouse_1)
+print(warehouse_2)
+print(warehouse_3)
+
+print(warehouse_1.operate())
+print(warehouse_2.operate())
+print(warehouse_3.operate())
