@@ -1,0 +1,134 @@
+#-------------------- INTRODUCTION --------------------------------
+# Building Work Order (WO) Management System for an Operations Manager. The system allows managers to:
+# 1. Create work orders
+# 2. View work order details
+# 3. Mark work orders as completed
+# 4. Delete work orders
+# 5. View their complete list of work orders
+# 6. Simulate operations workflow
+#-------------------------------------------------------------------
+#---------------------- USER STORIES -------------------------------
+# 1. As an operations manager, I want to create work orders, so that tasks can be tracked and assigned properly
+# 2. As an operations manager, I want to view all work orders, so that I can see everything currently assigned to me
+# 3. As an operations manager, I want to read a full work order, so that I can view all details clearly
+# 4. As an operations manager,  I want to delete a work order, so that old and completed items don't clutter my list
+# 5. As an operations manager, I want one method that checks all my work orders, so that I don't need to manually access the WorkOrderList
+# 6. As a business analyst, I want to simulation of work order operations, so that the system demonstrates realistic use cases
+#-------------------------------------------------------------------
+#---------------------- TEST CASES ---------------------------------
+# 1. Create a work order
+# 2. List work orders (empty)
+# 3. List work orders (non-empty)
+# 4. Read a work order (Invalid index)
+# 5. Read a work order (Valid)
+# 6. Delete a work order (Valid)
+# 7. Delete a work order (Invalid index)
+# 8. Manager method delegation
+# 9. Main simulation
+#--------------------------------------------------------------------
+from datetime import datetime
+
+class WorkOrder:
+    def __init__(self, creator, description, priority):
+        self.creator = creator
+        self.description = description
+        self.priority = priority
+        self.completed = False
+        self.timestamp = datetime.now()
+    
+    def mark_as_completed(self):
+        self.completed = True
+    
+    def display_full_order(self):
+        self.mark_as_completed()
+        print("\n--- Work Order---")
+        print(f"Created by: {self.creator}")
+        print(f"Priority: {self.priority}")
+        print(f"Description: {self.description}")
+        print(f"Created on: {self.timestamp.strftime('%Y-%m-%d %H:%M')}")
+    
+    def __str__(self):
+        status = "Completed" if self.completed else "Pending"
+        return f"{self.description} | Priority: {self.priority} | Status: {status}"
+
+class WorkOrderList:
+    def __init__(self):
+        self.orders = []
+
+    def add_order(self, order):
+        self.orders.append(order)
+    
+    def list_orders(self):
+        if not self.orders:
+            print("No work orders assigned.\n")
+            return
+        
+        print("\nYour Work Orders:")
+        for i, order in enumerate(self.orders, start = 1):
+            print(f"{i}. {order}")
+    
+    def read_order(self, index):
+        if not self.orders:
+            print("No work orders assigned.\n")
+            return
+
+        actual_index = index - 1
+
+        if actual_index < 0 or actual_index >= len(self.orders):
+            print("Invalid work order number.\n")
+            return
+        
+        self.orders[actual_index].display_full_order()
+
+    def delete_order(self, index):
+        if not self.orders:
+            print("No work orders assigned.\n")
+            return
+        
+        actual_index = index - 1
+
+        if actual_index < 0 or actual_index >= len(self.orders):
+            print("Invalid word order number.\n")
+            return
+        
+        del self.orders[actual_index]
+        print("Work Order deleted.\n")
+
+class Manager:
+    def __init__(self, name):
+        self.name = name
+        self.work_orders = WorkOrderList()
+
+    def create_work_order(self, description, priority):
+        order = WorkOrder(self.name, description, priority)
+        self.work_orders.add_order(order)
+        print(f"Work Order created by {self.name}.\n")
+
+    def check_orders(self):
+        print(f"\n{self.name}'s Work Orders:")
+        self.work_orders.list_orders()
+
+def main():
+    # Create Managers
+    Sasi = Manager("Sasi")
+    Kiran = Manager("Kiran")
+
+    # Create work orders
+    Sasi.create_work_order("Inspect equipment", "High")
+    Sasi.create_work_order("Schedule maintenance", "Medium")
+    Sasi.create_work_order("Update SOP document", "Low")
+
+    # Manager views work orders
+    Sasi.check_orders()
+
+    # Read first work order
+    Sasi.work_orders.read_order(1)
+
+    # Delete first work order
+    Sasi.work_orders.delete_order(1)
+
+    # View updated list
+    Sasi.check_orders()
+
+if __name__ == '__main__':
+    main()    
