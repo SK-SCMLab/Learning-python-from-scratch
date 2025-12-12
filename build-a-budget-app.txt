@@ -1,0 +1,115 @@
+** start of main.py **
+
+class Category:
+    def __init__(self, name):
+        self.name = name
+        self.ledger = []
+    
+    def deposit(self, amount, description=""):
+        self.ledger.append({"amount": amount, "description": description})
+    
+    def withdraw(self, amount, description=""):
+        if self.check_funds(amount):
+            self.ledger.append({"amount": -amount, "description": description})
+            return True
+        return False
+    
+    def get_balance(self):
+        return sum(transaction["amount"] for transaction in self.ledger)
+    
+    def transfer(self, amount, destination_category):
+        if self.check_funds(amount):
+            self.withdraw(amount, f"Transfer to {destination_category.name}")
+            destination_category.deposit(amount, f"Transfer from {self.name}")
+            return True
+        return False
+    
+    def check_funds(self, amount):
+        return amount <= self.get_balance()
+    
+    def __str__(self):
+    # Create title line
+        title = self.name.center(30, "*")
+    
+    # Build ledger lines
+        lines = [title]
+        for transaction in self.ledger:
+        # Truncate description to 23 characters
+            description = transaction["description"][:23]
+        # Format amount with 2 decimal places
+            amount = f"{transaction['amount']:.2f}"
+        # Left-align description
+            line = f"{description:<23}{amount:>7}"
+            lines.append(line)
+        
+        # Add total line
+        total = self.get_balance()
+        lines.append(f"Total: {total:.2f}")
+
+        return "\n".join(lines)
+
+
+
+def create_spend_chart(categories):
+    """
+    Create a bar chart showing percentage of spending by category.
+    """
+    # Calculate total amount withdrawn across all categories
+    total_withdrawn = 0
+    category_withdrawals = []
+    
+    for category in categories:
+        # Sum all negative amounts (withdrawals) for each category
+        withdrawn = sum(
+            -transaction["amount"] 
+            for transaction in category.ledger 
+            if transaction["amount"] < 0
+        )
+        category_withdrawals.append(withdrawn)
+        total_withdrawn += withdrawn
+    
+    # Calculate percentages and round down to nearest 10
+    percentages = []
+    for withdrawn in category_withdrawals:
+        if total_withdrawn == 0:
+            percentage = 0
+        else:
+            percentage = int((withdrawn / total_withdrawn) * 100 / 10) * 10
+        percentages.append(percentage)
+    
+    # Build the chart lines
+    lines = ["Percentage spent by category"]
+    
+    # Add y-axis labels and bars
+    for y in range(100, -1, -10):
+        line = f"{y:>3}|"
+        line += " "
+        for percentage in percentages:
+            if percentage >= y:
+                line += "o"
+            else:
+                line += " "
+            line += "  "
+        lines.append(line)
+    
+    # Add horizontal line
+    dash_line = "    " + "-" * (3 * len(categories) + 1)
+    lines.append(dash_line)
+    
+    # Add category names vertically
+    max_length = max(len(category.name) for category in categories)
+    for i in range(max_length):
+        line = "     "
+        for category in categories:
+            if i < len(category.name):
+                line += category.name[i]
+            else:
+                line += " "
+            line += "  "
+        lines.append(line)
+    
+    return "\n".join(lines)
+
+
+** end of main.py **
+
