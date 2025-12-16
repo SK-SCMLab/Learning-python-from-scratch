@@ -1,0 +1,326 @@
+"""
+Inventory Control System - Product and Warehouse management. Manages product inventory with transaction ledgers and warehouse operations.
+"""
+########################## USER STORIES #################################
+#1. As a warehouse manager, I want to create new products with unique identifiers and reorder levels. So that I can track inventory for different items
+#2. As a inventory clerk, I want to record incoming stock from suppliers, so that the system reflects items received
+#3. As a customer service representative, I want to issue stock to customers, so that I can fulfill orders and track inventory
+#4. As a warehose manager, I want to verify if enough stock exists before issue items, so that I don't oversell products
+#5. As a system user, I want to see the current stock level, so that I know what invetbory is available,\
+#6. As a warehouse manager, I want to know where items are running low, so that I can place reorder before stokcout
+#7. As a warehouse manager, I want to transfer for inventory between products, so that I reorganize stock across locations
+#8. Ass a warehouse manager, I want to creawte anad manager warehouses, so that I can organize invnetory aby location
+#9. As warehouse manager, I want to idenfify all products needing reorder, so that I an prioritize purchasing
+#10. As a Finance manager, I want to calculate total inventory value, so that I can assess actual vaule
+#11. As a warehouse clerk, I want to see detailed product information, so that I can verify inventory and transactions
+#12. As a Warehouse manager, I want comprehesive warehouse reports, so that I can monitor overall inventory health
+#13. As a supply chain manager, I want to manage multiple warehouses centrally, so that I can coordinate inventory across locations
+#14. As an auditor, I want to see complete transaction history, so that I can verify all inventory movements
+#15. As an inventory accountant, I want to track cost per unit received, so that I can calculate accurate inventory valuation
+#-------------------------------------------------------------------------------------------------------------------------------------
+class Product:
+    """ A class to represent a product in the inventory with transaction ledger"""
+
+    def __init__(self, product_id, name, reorder_level=10):
+        """
+        Initialize a product with ID, name, and reorder level
+        Args:
+            product_id: Unique identifier for the product
+            name: name of the product
+            reorder_level: minimum quantity before reorder alert (default: 10)
+        """
+        self.product_id = product_id
+        self.name = name
+        self.reorder_level = reorder_level
+        self.transactions = [] # Transaction ledger
+
+    def receive_stock(self, quantity, source="Supplier", cost_per_unit=0):
+        """
+        Add stock to inventory (incoming transaction)
+        Args:
+            quantity: Amount received (positive number)
+            source: where stock came from (default: "Supplier")
+            cost_per_unit: Cost per unit for accounting
+        """
+        self.transactions.append({
+            "type": "receive",
+            "quantity": quantity,
+            "source": source,
+            "cost_per_unit": cost_per_unit,
+            "total_cost": quantity * cost_per_unit
+        })
+    
+    def issue_stock(self, quantity, destination="Customer", reason="Sale"):
+        """
+        Remove stock from inventory (outgoing transaction)
+        Args:
+            quantity: Amount issued (positive number)
+            destination: where stock is going
+            reason: Reason for issuance (sale, waste, damaged, etc.)
+            Returns: True if issue succeeded, False if insufficient stock
+        """
+        if self.check_stock(quantity):
+            self.transactions.append({
+                "type": "issue",
+                "quantity": -quantity,
+                "destination": destination,
+                "reason": reason
+            })
+            return True
+        return False
+    
+    def get_current_stock(self):
+        """
+        Calculate current stock level.
+        Returns:
+            Current quantity in stock
+        """
+        return sum(transaction["quantity"] for transaction in self.transactions)
+    
+    def check_stock(self, quantity):
+        """
+        Check if sufficient stock is available.
+        Args:
+            quantity: Quantity to check
+        
+        Returns:
+            True if quantity <= current stock, False otherwise"""
+        return quantity <= self.get_current_stock()
+    
+    def is_low_stock(self):
+        """Check if stock is below reorder level"""
+        return self.get_current_stock() <= self.reorder_level
+    
+    def transfer_stock(self, quantity, destination_product, warehouse="Default"):
+        """
+        Transfer stock to another product (inter-warehouse transfer)
+            Args:
+                quantity: Amount to transfer
+                destination_product: Product object to transfer to
+                warehouse: warehouse location
+                returns: True if transfer succeeded, False if insufficient stock
+        """
+        if self.check_stock(quantity):
+            self.issue_stock(quantity, destination_product.name, f"Transfer to {destination_product.name}")
+            destination_product.receive_stock(quantity, f"Transfer from {self.name}", 0)
+            return True
+        return False
+    
+    def get_transaction_history(self):
+        """
+        Get formatted transaction history.
+        
+        Returns:
+            List of formatted transaction strings
+        """
+        history = []
+        for trans in self.transactions:
+            if trans["type"] == "receive":
+                entry = f"RECEIVE {trans['quantity']:>6} units from {trans['source']}"
+                if trans["cost_per_unit"] > 0:
+                    entry += f" @{trans['cost_per_unit']}/unit"
+                else:
+                    entry = f"ISSUE {abs(trans['quantity']):>6} units to {trans['destination']}"
+                    entry += f" ({trans['reason']})"
+                history.append(entry)
+            return history
+    
+    def __str__(self):
+        """
+        Return formatted string representation of product inventory
+        """
+        header = f"Product: {self.name} (ID: {self.product_id})".center(60, "=")
+        lines = [header]
+
+        # Transaction details
+        lines.append(f"{'Type':<10} {'Qty':>8} {'Description':<35}")
+        lines.append("-" * 60)
+
+        for trans in self.transactions:
+            trans_type = trans["type"][:8]
+            qty = trans["quantity"]
+
+            if trans["type"] == "receive":
+                desc = trans["source"][:35]
+            else:
+                desc = f"{trans['description']} - {trans['reason']}"[:35]
+            
+            lines.append(f"{trans_type:<10} {qty:>8} {desc:<35}")
+
+            lines.append("-" * 60)
+            current = self.get_current_stock()
+            status = "LOW STOCK" if self.is_low_stock() else "OK"
+            lines.append(f"Current stock: {current:>8} units [{status}]")
+            lines.append(f"Reorder level: {self.reorder_level:>8} units")
+
+            return "\n".join(lines)
+        
+class Warehouse:
+    """A class to represent a warehouse managing multiple products"""
+
+    def __init__(self, name, location=""):
+        """
+        Initialize a warehouse.
+        
+        Args:
+            name: Name of the warehouse
+            location: Physical location of warehouse
+        """
+        self.name = name
+        self.location = location
+        self.products = {} # product_id -> Product object
+    
+    def add_product(self, product):
+        """
+        Add a product to the warehouse inventory.
+
+        Args:
+            product: Product object to add
+        """
+        self.products[product.product_id] = product
+    
+    def get_product(self, product_id):
+        """
+        Get a product by ID
+        
+        Args:
+            product_id: ID of product to retrieve
+        
+        Returns:
+            Product object or None if not found
+        """
+        return self.products.get(product_id)
+    
+    def get_total_inventory_value(self):
+        """
+        Calculate total value of all inventory
+        
+        Returns:
+            Total value of inventory in stock
+        """
+        total = 0
+        for product in self.products.values():
+            current_stock = product.get_current_stock()
+            # Calculate weighted average cost
+            for trans in product.transactions:
+                if trans["type"] == "receive" and current_stock > 0:
+                    total += trans["total_cost"]
+        return total
+    
+    def get_low_stock_products(self):
+        """
+        Get list of products below reorder level.
+        
+        Returns:
+            List of product objects with low stock
+        """
+        return [p for p in self.products.values() if p.is_low_stock()]
+    
+    def get_total_units(self):
+        """
+        Calculate total units in warehouse
+        
+        Returns:
+            Total quantity of all products
+        """
+        return sum(p.get_current_stock() for p in self.products.values())
+    
+    def generate_report(self):
+        """
+        Generate comprehensive warehouse inventory report
+
+        Returns:
+            Formatted report string
+        """
+        report = f"\n{'WAREHOUSE INVENTORY REPORT':^60}\n"
+        report += f"Warehouse: {self.name}\n"
+        if self.location:
+            report += f"Location: {self.location}\n"
+        report += "=" * 60 + "\n\n"
+
+        # Summary statistics
+        total_products = len(self.products)
+        low_stock = len(self.get_low_stock_products())
+        total_units = self.get_total_units()
+        total_value = self.get_total_inventory_value()
+
+        report += "SUMMARY:\n"
+        report += f"  Total products: {total_products}\n"
+        report += f"  Produts below reorder level: {low_stock}\n"
+        report += f"  Total inventory value: ${total_value:,.2f}\n\n"
+
+        # Product list with details
+        report += "PRODUCT INVENTORY:\n"
+        report += f"{'ID':<12} {'Product Name':<25} {'Stock':>8} {'Reorder':>8} {'Status':<12}\n"
+        report += "-" * 60 + "\n"
+
+        for product_id, product in sorted(self.products.items()):
+            stock = product.get_current_stock()
+            reorder = product.reorder_level
+            status = "LOW" if product.is_low_stock() else "OK"
+
+            report += f"{product_id:<12} {product.name:<25} {stock:>8} {reorder:>8} {status:<12}\n"
+
+            # Low stock alert section
+            if low_stock > 0:
+                report += "\n" + "=" * 60 + "\n"
+                report += "REORDER REQUIRED:\n"
+                for product in self.get_low_stock_products():
+                    needed = product.reorder_level - product.get_current_stock()
+                    report += f"    {product.name}: Need {needed} more units\n"
+        
+        return report
+
+class InventoryManager:
+    """Central Manager for multiple warehouses."""
+
+    def __init__(self):
+        """Initialize the Inventory Manager"""
+        self.warehouses = {}
+    
+    def create_warehouse(self, warehouse_id, name, location=""):
+        """Create and register a new warehouse."""
+        warehouse = Warehouse(name, location)
+        self.warehouses[warehouse_id] = warehouse
+        return warehouse
+    
+    def get_warehouse(self, warehouse_id):
+        """Get warehouse by ID"""
+        return self.warehouses.get(warehouse_id)
+    
+    def get_product_across_warehouses(self, product_id):
+        """Find a product across all warehouses"""
+        for warehouse in self.warehouses.values():
+            if product_id in warehouse.products:
+                return warehouse.products[product_id]
+        return None
+    
+    def generate_global_report(self):
+        """Generate report across all warehouses."""
+        report += "\n" + "=" * 60 + "\n"
+        report += "GLOBAL INVENTORY REPORT\n"
+        report += "=" * 60 + "\n\n"
+
+        total_value = 0
+        total_units = 0
+        total_low_stock = 0
+
+        for warehouse_id, warehouse in self.warehouses.items():
+            report += f"Warehouse: {warehouse.name}\n"
+            report += f"   Products: {len(warehouse.products)}\n"
+            report += f"   Total units: {warehouse.get_total_units()}\n"
+            report += f"   Total value: $ {warehouse.get_total_inventory_value():,.2f}\n"
+            report += f"   Low stock items: {len(warehouse.get_low_stock_products())}\n\n"
+
+            total_value += warehouse.get_total_inventory_value()
+            total_units += warehouse.get_total_units()
+            total_low_stock += len(warehouse.get_low_stock_products())
+
+            report += "=" * 60 + "\n"
+            report += "OVERALL TOTALS:\n"
+            report += f"   Total Warehouses: {len(self.warehouses)}\n"
+            report += f"   Total Units: {total_units}\n"
+            report += f"   Total Value: $ {total_value:,.2f}\n"
+            report += f"   Critical Reorders: {total_low_stock}\n"
+
+            return report
