@@ -1543,3 +1543,22 @@ print('Car 1 Color: ', car1.color) # Car 1 Color: red
 print('Car 2 Brand: ', car2.brand) # Car 2 Brand: Lambo
 print('Car 2 Color: '. car2.color) # Car 2 color: greeb
 ```
+OOP has four key principles that help you organize and manage cost effectively: encapsulation, inheritance, polymorphisam, and abstraction
+
+**Encapsulation** is the bundling of the attributes and methods of an object into a single unit, the class. With this, you can hide the internal state of the object behind a simple set of public methods and attributes that act like doors. Behind these doors are private attributes and methods that control how the data changes and who can see it
+
+Let's say you want to track your Amazon Pay Balance. You want to allow people to deposit or withdraw money from the wallet, but no one should be able to tamper with the balance directly. In that case, you can make *deposit()* and *withdraw()* public methods, and you hide the balance under the *_balance* attribute
+```
+class AmazonPay:
+  def __init__(self, balance):
+      self._balance = balance # For internal use by convention
+
+  def deposit(self, amount):
+      if amount > 0:
+          self._balance += amount # Add to the balance safely
+
+  def withdraw(self, amount):
+      if 0 < amount <= self._balance:
+          self._balance -= amount # Remove from the balance safely
+```
+While a single underscore prefix is just a convention, prefixing attributes and methods with a double underscore effectively prevents them to be accessed from the outside of their class, making those attributes and methods private. Also, you can define a private *__validate** method to check if every deposit or withdrawal amount is a positive number:
