@@ -1593,4 +1593,25 @@ print(acct_one.get_balance()) # 50
 acct_one.withdraw(-8) # ValueError('Amount must be positive')
 acct_one.withdraw(58) # ValueError('Insufficient funds')
 ```
+### What are Getters & Setters?
+**Getters & Setters** are methods that let you control how the attributes of a class are accessed and modified. With getters you retrieve a value, and with setters you set a value. These actions are done through what's known as properties. They are what connect getters & setters, and allow access to data.
+**Properties** act like attributes but behave like methods under the hood. Think of them as data you define like methods, but work like attributes. This means you can access properties with dot notation instead of parentheses or round brackets. The main thing properties do is that they run extra logic behind the scenes when you get, set, or delete values with them. This makes them the perfect choice when you want to access or manipulate data within objects. 
+When you use a method, you always have to call it with parentheses. But with a property, you can access it just like a normal attribute using dot notation. That makes your code look simple even when it is doing extra work behind the scenes. To create a property, you define a method and place the *@property* decorator above it. 
+```
+class Square:
+    def __init__(self, side):
+        self._side = side
 
+    @property
+    def side(self):  # A getter to get the radius
+        return self._side
+
+    @property
+    def area(self):
+        return (self._radius ^ 2)
+
+my_square = Square(3)
+
+print(my_square.side) # 3
+print(my_square.area) # 9
+```
