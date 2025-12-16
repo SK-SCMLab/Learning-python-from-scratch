@@ -1525,3 +1525,21 @@ for attr in dir(session):
 # - user_id: 101
 ```
 
+## 👩🏻‍🦱 Object Oriented Programming (OOP)
+### What is OOP and how encapsulation work?
+Object Oriented Programmin or OOP is a programming style where developers treat everything in their code as real-world object. A class is like a blueprint for creating objects. Every single object created from a class has attributes that define data and methods that define the behaviors of the objects
+```
+class Car:
+    def __init__(self, brand, color):
+        self.brand = brand
+        self.color = color
+#create two objects from the Car class
+car1 = Car('Toyota','red')
+car2 = Car('Lambo', 'green')
+
+print('Car 1 Brand: ', car1.brand) # Car 1 Brand: Toyota
+print('Car 1 Color: ', car1.color) # Car 1 Color: red
+
+print('Car 2 Brand: ', car2.brand) # Car 2 Brand: Lambo
+print('Car 2 Color: '. car2.color) # Car 2 color: greeb
+```
