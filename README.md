@@ -1603,15 +1603,66 @@ class Square:
         self._side = side
 
     @property
-    def side(self):  # A getter to get the radius
+    def side(self):  # A getter to get the side
         return self._side
 
     @property
     def area(self):
-        return (self._radius ^ 2)
+        return (self._side ^ 2)
 
 my_square = Square(3)
 
 print(my_square.side) # 3
 print(my_square.area) # 9
 ```
+To make a setter to create the side, for example, you have to define another method with the same name and use **@<property_name>.setter** above it:
+```
+class Square:
+    def __init__(self, side):
+        self._side = side
+
+    @property
+    def side(self):  # A getter to get the side
+        return self._side
+
+    @side.setter
+    def side(self, value):   # A setter to set the radius
+        if value <= 0:
+            raise ValueError('Side must be positive')
+        self._radius = value
+
+my_square = Square(3)
+print('Initial side:', my_square.side)  # Initial side: 3
+
+my_square.side = 8
+print('After modifying the side:', my_square.side) # Afte modifying the side: 8
+```
+A *deleter* runs custom logic when you use the *del* statement on a property. To create one, you use the *@<property_name>.deleter* decorator:
+```
+class Square:
+    def __init__(self, side):
+        self._side = side
+
+    # Getter
+    @property
+    def side(self):
+        return self._side
+
+    # Setter
+    @side.setter
+    def side(self, value):
+        if value <= 0:
+            raise ValueError("Side must be positive")
+        self._side = value
+
+    # Deleter
+    @side.deleter
+    def side(def):
+        print("Deleting side....")
+        del self._side
+```
+**Getters** let you retrieve a value or even compute a value on the fly
+**Setters** let you modify the values safely by running checks before assignment
+**Properties** are what tie these getters and setters together so you can write logic while still using dot notation
+**Deleters** lets you define what happens when an attribute is deleted
+
