@@ -1,0 +1,129 @@
+#-------------------------------- BUSINESS CONTEXT -------------------------------------
+# A manufacturing plant runs three shifts and employs multiple operators and line supervisors
+#-------------------------------- USER STORIES -----------------------------------------
+#1. As an HR/Operations manager, create new employees with a starting level and default salary equal to the minimum salary for that level
+#2. As an operations maanger, update an employee's level:
+#   i. If invalid level -> get a clear error
+#   ii. If same level -> get a "already selected level" error
+#   iii. On successful promotion, salary automatically updates to at least the new level's base
+#3. As a shift in-charge, set or adjust an employee's salary:
+#   i. It must be numeric
+#   ii. It must not fall below the base salary of the current level
+#4. As a plant manager, record monthly kpi_score for each employee
+#   i. The system validates the score range
+#   ii. It calculates the montly incentive amount
+#5. As a finance anaylst, print a summary:
+#   i. Employee name, level, base salary, current salary, KPI score, monthly incentive, and total payout
+#------------------------------------------------------------------------------------------
+class Employee:
+    _base_salaries = {
+        "T1": 22000,
+        "T2": 26000,
+        "OP": 30000,
+        "SOP": 36000,
+        "SUP": 45000
+    }
+
+    def __init__(self, name, level):
+        self._name = name
+        self._level = None
+        self._salary = None
+        self._kpi_score = 0
+        self._monthly_incentive = 0
+
+        # Use the property to trigger all validations and default salary
+        self.level = level
+        self.salary = Employee._base_salaries[self.level]
+    
+    @property
+    def level(self):
+        return self._level
+
+    @level.setter
+    def level(self, new_level):
+        if new_level not in Employee._base_salaries:
+            raise ValueError(f"Invalid value '{new_level}' for 'level' attribute.")
+        
+        if self._level is not None and new_level == self.level:
+            raise ValueError(f"'{self.level}' is already the selected level.")
+
+        # Call salary setter instead of touching _salary directly
+        self.salary = Employee._base_salaries[new_level]
+        self._level = new_level
+
+    @property
+    def salary(self):
+        return self._salary
+    
+    @salary.setter
+    def salary(self, new_salary):
+        if not isinstance(new_salary, (int, float)):
+            raise TypeError("'salary' must be a number.")
+        
+        min_salary = Employee._base_salaries[self.level]
+
+        if new_salary < min_salary:
+            raise ValueError(f"Salary must be higher than minimum salary ${min_salary}.")
+        
+        self._salary = new_salary
+        # Incentive may depend on base salary, so recompute
+        self._recalculate_incentive()
+
+    @property
+    def kpi_score(self):
+        return self._kpi_score
+    
+    @kpi_score.setter
+    def kpi_score(self, score):
+        if not isinstance(score, (int, float)):
+            raise TypeError("kpi_score' must be a number")
+        
+        if score < 0 or score > 100:
+            raise ValueError("'kpi_score' must be between 0 and 100")
+        
+        self._kpi_score = score
+        self._recalculate_incentive()
+    
+    @property
+    def monthly_incentive(self):
+        return self._monthly_incentive
+    
+    def _recalculate_incentive(self):
+        base = Employee._base_salaries[self.level]
+        kpi = self._kpi_score
+
+        if kpi < 80:
+            incentive_rate = 0.0
+        elif kpi < 90:
+            incentive_rate = 0.05
+        else:
+            incentive_rate = 0.10
+
+        self._monthly_incentive = base * incentive_rate
+    
+    def total_payout(self):
+        return self.salary + self.monthly_incentive
+    
+if __name__ == "__main__":
+    # Create employees
+    op1 = Employee("Sasi", "OP")
+    op2 = Employee("Kiran", "T2")
+
+    # Set salary (with validation)
+    op1.salary = 32000                 # OK (> base 30000)
+    # op1.salary = 25000               # would raise ValueError
+
+    # Record performance KPI
+    op1.kpi_score = 92                 # 10% incentive
+    op2.kpi_score = 85                 # 5% incentive
+
+    # Promotion
+    op2.level = "OP"
+
+    # Report
+    for e in (op1, op2):
+        print(
+            f"{e._name} | Level: {e.level} | Salary: {e.salary} | "
+            f"KPI: {e.kpi_score} | Incentive: {e.monthly_incentive} | "
+            f"Total payout: {e.total_payout()}"
+        )
