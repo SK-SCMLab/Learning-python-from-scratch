@@ -1666,3 +1666,101 @@ class Square:
 **Properties** are what tie these getters and setters together so you can write logic while still using dot notation
 **Deleters** lets you define what happens when an attribute is deleted
 
+## 👨🏻 What is Inheritence and how does it promote code reuse?
+With inheritence, a subclass (or child class) can use the attributes and methods of a base class (for parent class). This allows you to reuse code, create clear class hierarchies, and customize behavior without rewriting everything. You can customize by extending existing methods or overriding them in the child class
+A single inheritence, since a child class inherits from exactly one parent class
+**Syntax**
+```
+class Parent:
+    # Attributes and methods for parent
+
+class Child:
+    # Attributes and methods for child
+```
+**Example**
+```
+class Animal:
+  def __init__(self, name):
+      self.name = name
+
+  def sound(self):
+      return f'{self.name} makes a sound'
+
+class Dog(Animal):
+  bark = "woof! woof! woof!"
+
+jack = Dog('Jack')
+print(jack.sound()) #Jack makes a sound
+print(jack.bark) #woof! woof! woof!
+```
+In the above example, we're able to reuse the *self.name* attribute and the *sound()* method from the parent **Animal** class in the child **Dog** class
+```
+class Animal:
+  def __init__(self, name):
+      self.name = name
+
+  def sound(self):
+      return f'{self.name} makes a sound
+
+class Dog(Animal):
+  bark = 'woof! woof! woof!'
+
+  # Call Animal.sound(), then append bark
+  def sound(self):
+      base = super().sound()
+      return f'{base}, then {self.name} barks {self.bark}'
+
+jack = Dog('Jack')
+print(jack.sound()) # Jack makes a sound, then Jack barks woof! woof! woof!
+```
+A multiple inheritence is where a child class can inherit from more than one parent class
+**Syntax**
+```
+class Parent:
+    # Attributes and methods for Parent
+
+class Child:
+    # Attributes and methods for Child
+
+class GrandChild(Parent, Child):
+    # GrandChild inherits from both Parent and Child
+    # GrandChild can combine or override behavior from each
+```
+**Example**
+```
+class Walker:
+    def walk(self):
+        return 'I can walk on land'
+
+class Swimmer:
+    def swim(self):
+        return 'I can swim in water'
+
+#Amphibian inherits from both Walker and Swimmer
+class Amphibian(Walker, Swimmer):
+      def __init__(self, name):
+          self.name = name
+
+      def introduce(self):
+          return f"I'm {self.name} the frog. {self.walk()} and {self.swim()}."
+
+frog = Amphibian('Freddy')
+print(frog.introduce())
+# Output: I'm Freddy the frog. I can walk on land and I can swim in water
+```
+### What is Polymorphism and how does it promote code reuse?
+Polymorphism allows methods in different classes to share the same name but perform different tasks. You call the same method name on different objects, and each responds in its own way
+**Syntax**
+```
+class A:
+  def action(self):  ...
+
+class B:
+  def action(self):  ...
+
+class C:
+  def action(self):  ...
+
+Class().method()  # Works for A, B, C
+```
+
