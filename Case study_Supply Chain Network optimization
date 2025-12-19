@@ -1,0 +1,127 @@
+#--------------------------------------- OBJECTIVE -----------------------------------------
+# Build a Supply Chain Network Optimization system that tracks the inventory movements across warehouses and visualizes how inventory is visualized across the network
+#--------------------------------------- USER STORIES --------------------------------------
+# 1. You should create a class named Warehouse that accepts a name as an argument
+# 2. The Warehouse class should have an instance attribute called Ledger that is a list
+# 3. The Warehouse class should have a method receive_stock that:
+#   i. Accepts an amount and an optional description (default empty string)
+#   ii. Appends {'amount': amount, 'description': description} to the ledger
+# 4. The Warehouse class should have a method dispatch_stock that:
+#   i. Accepts an amount and an optional description
+#   ii. Stores the amount as a negative number in the ledger
+#   iii. Returns True if the patch succeeds, False otherwise
+# 5. The Warehouse class should have a method get_stock_level that returns the current stock
+# 6. The Warehouse class should have a method check_capacity that:
+#   i. Returns False if the amount exceeds available stock
+#   ii. Returns True otherwise
+# 7. The dispatch_stock method must use check_capacity
+# 8. The Warehouse class should have a method transfer_stock that:
+#   i. Transfers stock to another Warehouse instance
+#   ii. Uses descriptions:
+#       a. Transfer to [Destination]
+#       b. Transfer from [Source]
+#   iii. Returns True if successful, False otherwise
+# 9. The transfer_stock method should use check_capacity
+# 10. Printing a Warehouse object should:
+#   i. Show a title line of 30 characters with the warehouse name centered and surrounded by *
+#   ii. List ledger entries with:
+#       a. Description left-aligned (max 23 characters)
+#       b. Amount right-aligned (2 decimals, max 7 chars)
+#   iii. Show a final line:
+#   Total Stock: <amount>
+# 11. You should have a function outside the class named
+#       create_inventory_distribution_chart
+# 12. The chart should:
+#   i. Be titled Inventory Distribution by Warehouse
+#   ii. Use stock levels (not receipts)
+#   iii. Round percentages down to the nearest 10
+#   iv. Display bars using o
+#    v. Label percentages from 100 to 0
+#   vi. Have equal line lengths
+#   vii. Separate bars by two spaces
+#   viii. Print warehouse names vertically
+#   ix. Have no trailing newline
+#------------------------------------------------------------------------------------------------------------------------
+class Warehouse:
+    def __init__(self, name):
+        self.name = name
+        self.ledger = []
+    
+    def receive_stock(self, amount, description=""):
+        self.ledger.append({
+            "amount": amount,
+            "description": description
+        })
+    
+    def dispatch_stock(self, amount, description=""):
+        if not self.check_capacity(amount):
+            return False
+        
+        self.ledger.append({
+            "amount": -amount,
+            "description": description
+        })
+        return True
+
+    def get_stock_level(self):
+        total = 0
+        for item in self.ledger:
+            total += item["amount"]
+        return total
+    
+    def check_capacity(self, amount):
+        return amount <= self.get_stock_level()
+    
+    def transfer_stock(self, amount, destination):
+        if not self.check_capacity(amount):
+            return False
+        
+        self.dispatch_stock(amount, f"Transfer to {destination.name}")
+        destination.receive_stock(amount, f"Transfer from {self.name}")
+        return True
+
+    def __str__(self):
+        title = self.name.center(30, "*") + "\n"
+        body = ""
+
+        for item in self.ledger:
+            desc = item["description"][:23].ljust(23)
+            amt = f"{item['amount']:.2f}".rjust(7)
+            body += f"{desc}{amt}\n"
+
+        total = f"Total stock: {self.get_stock_level():.2f}"
+        return title + body + total
+
+def create_inventory_distribution_chart(warehouses):
+    title = "Inventory distribution by Warehouse\n"
+
+    stocks = [w.get_stock_level() for w in warehouses]
+    total_stock = sum(stocks)
+
+    percentages = []
+    for stock in stocks:
+        percentage = (stock / total_stock) * 100 if total_stock > 0 else 0
+        percentages.append(int(percent // 10) * 10)
+    
+    chart = ""
+    for level in range(100, -1, -10):
+        chart += str(level).rjust(3) + "| "
+        for percent in percentages:
+            chart += "o  " if percent >= level else "   "
+        chart += "\n"
+    
+    chart += "    " + "-" * (3 * len(warehouses) + 1) + "\n"
+
+    max_len = max(len(w.name) for w in warehouses)
+    for i in range(max_len):
+        chart += "     "
+        for w in warehouses:
+            if i < len(w.name):
+                    chart += w.name[i] + "  "
+            else:
+                    chart += "   "
+
+            if i < max_len - 1:
+                chart += "\n"
+            
+    return title + chart
