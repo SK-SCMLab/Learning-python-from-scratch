@@ -1817,3 +1817,26 @@ for animal in animals:
 # A monkey ooh ooh aah aah ooh ooh aah aah
 ```
 
+### What is Name Mangling and how does it work?
+A single underscore is a convention that means the attribute is meant for internal use in the class and should not be directly accessed from outside the class. Double underscore, on the other hand, prevents that attribute from being accessed directly from outside the class. Prefixing an attribute with a double underscore triggers Python's name mangling process, in which Python internally renames the attribute by adding an underscore and the class name as a prefix, turning *__attribute* to *_ClassName__attribute*
+The main purpose of Name Mangling is to prevent accidental attribute and method overriding when you use inheritence. 
+```
+class Example:
+    def __init__(self, internal, private):
+        self._internal = internal
+        self.__private = private
+
+example1 = Example(
+    'I can be accessed from outside the class, but should not',
+    'I cannot be accessed directly from outside the class"
+)
+
+print(example1.__dict_)
+```
+Result would be:
+```
+{
+  '_internal': 'I can be accessed from outside the class, but should not'
+  '_Example__private': 'I cannot be accessed directly from outside the class'
+```
+
