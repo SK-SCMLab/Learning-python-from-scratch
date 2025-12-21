@@ -1,0 +1,103 @@
+#---------------------------------- Problem Statement ----------------------------------------
+# You are building an FMCG Product catalogue to manage consumer goods sold in retail. The catalogue should support general FMCG products and perishable products, display them cleanly and separate them by category when printed
+#---------------------------------- User stories ---------------------------------------------
+#1. You should have a class named "Product"
+#2. The Product class should have:
+#   i. name
+#   ii. brand
+#   iii. price
+#3. The Product class should raise a ValueError if name is empty or whitespace
+#4. Printing a Product should return:
+#   i. name - brand, ₹price
+#5. You should have a class named "PerishableProduct" that inherits from "Product"
+#6. It should accept an additional attribute "expiry_date"
+#7. Printing a "PerishableProduct" should return:
+#   i. name - brand, ₹price (Expires: expiry_date)
+#8. You should have a custom exception named "ProductError"
+#9. It should store:
+#   i. error message
+#   ii. the invalid product
+#10. You should have a class named "ProductCatalogue"
+#11. It should have an attribute "items", initialized as an empty list
+#12. It should have an add method that:
+#   i. Accepts a product
+#   ii. Allows only Product or PerishableProduct
+#   iii. Raises ProductError otherwise
+#13. It should have:
+#   i. get_products() -> returns only Product
+#   ii. get_perishables() -> returns only PerishableProduct
+#14. Printing the catalogue should:
+#   i. Show empty message if no items
+#   ii. Display Products and Perishables separately
+#   iii. Use numbered lists starting from 1
+#---------------------------------------------------------------------------------------------------
+class ProductError(Exception):
+    def __init__(self, message, product):
+        super().__init__(message)
+        self.product = product
+
+# Base Product Class
+class Product:
+    """Parent class representing an FMCG product."""
+    def __init__(self, name, brand, price):
+        if name.strip() == "":
+            raise ValueError("Product name cannot be empty.")
+        
+        self.name = name
+        self.brand = brand
+        self.price = price
+
+    def __str__(self):
+        return f"{self.name} - {self.brand}, ₹{self.price}"
+
+# Perishable Product (Child class)
+class PerishableProduct(Product):
+    def __init__(self, name, brand, price, expiry_date):
+        super().__init__(name, brand, price)
+        self.expiry_date = expiry_date
+    
+    def __str__(self):
+        return (
+            f"{self.name} - {self.brand}, ₹{self.price} "
+            f"(Expires: {self.expiry_date})"
+        )
+
+# Product Catalogue
+class ProductCatalogue:
+    def __init__(self):
+        self.items = []
+
+    def add(self, product):
+        if not isinstance(product, Product):
+            raise ProductError(
+                "Only Product or PerishableProduct instances can be added.",
+            )
+        self.items.append(product)
+    
+    def get_products(self):
+        return [item for item in self.items if type(item) is Product]
+    
+    def get_perishables(self):
+        return [item for item in self.items if type(item) is PerishableProduct]
+    
+    def __str__(self):
+        if not self.items:
+            return "Product Catalogue (empty)"
+
+        products = self.get_products()
+        perishables = self.get_perishables()
+
+        result = f"Product Catalogue ({len(self.items)} items):\n\n"
+
+        if products:
+            result += "=== PRODUCTS ===\n"
+            for i, products in enumerate(products, start=1):
+                result += f"{i}. {product}\n"
+            
+        if perishables:
+            result += "=== PERISHABLES ===\n"
+            for i, item in enumerate(perishables, start=1):
+                result += f"{i}. {item}\n"
+            
+        return result
+    
