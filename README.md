@@ -1839,4 +1839,28 @@ Result would be:
   '_internal': 'I can be accessed from outside the class, but should not'
   '_Example__private': 'I cannot be accessed directly from outside the class'
 ```
+## 🧑🏻‍🦱 Understanding Abstraction
+### What is Abstraction and how does it help keep complex systems organized?
+Abstraction is a process of hiding complex implementaton details and showing only the essential features of an object or system. Think of it as focusing on what something does rather than how it does it. It is not limited to Python. It is a programming concept that can be implemented in many languages that support object-oriented programming. It provides you with a simplified interface to interact with a complex system. Python implements abstraction through **ABC** module. 
+
+**ABC** (Abstract Base class) is the class that is meant to be inherited from, but you cannot create direct objects from it. It is what defines a common interface of methods and properties that its subclass must implement. It is declated using the **@abstractmethod** decorator. It may have no implementation or a basic default one. However, any subclass must override it to be considered concrete and instantiable, even if a default implementation is provided
+**Syntax**
+```
+from abc import ABC, abstractmethod
+# Define an abstract base class
+class AbstractClass(ABC):
+    @abstractmethod
+    def abstract_method(self):
+    pass
+
+# Concrete subclass that implements the abstract method
+class ConcreteClassOne(AbstractClass):
+    def abstract_method(self):
+        print('Implementation in ConcreteClassOne')
+
+# Another concrete subclass
+class ConcreteClassTwo(AbstractClass):
+    def abstract_method(self):
+        print('Implementation in ConcreteClassTwo')
+```
 
