@@ -1,0 +1,128 @@
+#-------------------------- PROBLEM STATEMENT ------------------------------
+# QuickCommerce platforms (Blinkit/Zepto/Instamart-style) apply multiple discounts such as:
+#   i. Flash sale discounts
+#   ii. Delivery partner discounts
+#   iii. Prime/Express user benefits
+#-------------------------- USER STORIES -----------------------------------
+#1. You should create a class named "Order"\
+#2. The Order class should have:
+#   i. item_name
+#   ii. order_value
+#3. The constructor should raise a "ValueError" if item_name is empty
+#4. Printing and order should return
+#       item_name - $order_value
+#5. You should create an abstract base class named "QDiscountStrategy"
+#6. It should define two abstract methods:
+#   i. is_applicable(order, user_type)
+#   ii. apply_discount(order)
+#7. A "FlashSaleDiscount" should:
+#   i. Apply a percentage discount
+#   ii. Be valid only if discount <= 60%
+#8. A "FlashCartDiscount" should:
+#   i. Subtract a fixed amount
+#   ii. Be valid only if discount <= 15% of order value
+#9. A "PrimeUserDiscount" should:
+#   i. Apply 20% off
+#   ii. Be applicable only for "prime" users
+#10. You should create a QuickCommerceEngine class
+#11. It should:
+#   i. Accept a list of strategies
+#   ii. Calculate the lowest final price
+#   iii. Default the original price if no discounts apply
+#12. Print the best price formatted to two decimal places
+#-------------------------------------------------------------------------------------------
+from abc import ABC, abstractmethod
+from typing import List
+
+# Order class
+class Order:
+    def __init__(self, item_name: str, order_value: float) -> None:
+        if item_name.strip() == "":
+            raise ValueError("Item name cannot be empty.")
+        
+        self.item_name = item_name
+        self.order_value = order_value
+
+    def __str__(self):
+        return f"{self.item_name} - ${self.order_value}"
+
+# Abstract Discount Strategy
+class QDiscountStrategy(ABC):
+
+    @abstractmethod
+    def is_applicable(self, order: Order, user_type: str) -> bool:
+        pass
+
+    @abstractmethod
+    def apply_discount(self, order: Order) -> float:
+        pass
+
+# Flash sale discount
+class FlashSaleDiscount(QDiscountStrategy):
+    def __init__(self, percent: int) -> None:
+        self.percent = percent
+    
+    def is_applicable(self, order: Order, user_type: str) -> bool:
+        return self.percent <= 60
+    
+    def apply_discount(self, order: Order) -> float:
+        return order.order_value * (1 - self.percent / 100)
+
+# Flat cart discount
+class FlatCartDiscount(QDiscountStrategy):
+    def __init__(self, amount: int) -> None:
+        self.amount = amount
+    
+    def is_applicable(self, order: Order, user_type: str) -> bool:
+        return (order.order_value * 0.85) > self.amount
+    
+    def apply_discount(self, order: Order) -> float:
+        return order.order_value - self.amount
+
+# Prime user discount
+class PrimeUserDiscount(QDiscountStrategy):
+
+    def is_applicable(self, order: Order, user_type: str) -> bool:
+        return user_type.lower() == "prime"
+    
+    def apply_discount(self, order: Order) -> float:
+        return order.order_value * 0.8
+
+# Discount Engine
+class QuickCommerceEngine:
+    def __init__(self, strategies: List[QDiscountStrategy]) -> None:
+        self.strategies = strategies
+
+    def calculate_best_price(self, order: Order, user_type: str) -> float:
+        prices = [order.order_value]
+    
+        for strategy in self.strategies:
+            if strategy.is_applicable(order, user_type):
+                discounted = strategy.apply_discount(order)
+                prices.append(discounted)
+        
+        return min(prices)
+
+# Application Entry Point
+if __name__ == "__main__":
+    # Create Order
+    order = Order("Groceries Pack", 120.0)
+
+    # User Type
+    user_type = "Prime"
+
+    # Available discount strategies
+    strategies = [
+        FlashSaleDiscount(15),
+        FlatCartDiscount(10),
+        PrimeUserDiscount(),
+    ]
+
+    # Calculate best price
+    engine = QuickCommerceEngine(strategies)
+    best_price = engine.calculate_best_price(order, user_type)
+
+    # Final Output
+    print(
+        f"Best price for {order.item_name} for {user_type} user: ${best_price:.2f}"
+    )
