@@ -1,0 +1,136 @@
+#----------------------------------------------- PROBLEM STATEMENT ----------------------------------------------------
+# In a Quick Commerce dark store, FMCG items must be packed into standardized packaging boxes. Each item category has different space characteristics:
+#1. Staples -> rigid, stackable (rice, atta, pulses)\
+#2. Namkeen -> bulky, air-filled
+#3. Frozen foods -> compact but temperature-controlled
+# The system must:
+#   i. Represent different box sizes
+#   ii. Calculate capacity and fit
+#   iii. Decide how many item packs can fit inside the box
+#   iv. Maintain clear, readable outputs for warehouse staff
+#----------------------------------------------- USER STORIES ---------------------------------------------------------
+#1. You should create a class named "Box"
+#2. When a Box object is created, it should be initialized with:
+#   i. length
+#   ii. width
+#   iii. height
+#3. The Box class should have the following methods:
+#   i. set_length
+#   ii. set_width
+#   iii. set_height
+#   iv. get_volume
+#   v. get_surface_area
+#   vi. get_diagonal
+#   vii. get_box_layout
+#   viii. get_items_inside
+#4. If a Box instance is printed, it should display:
+#       Box(length=10, width=8, height=6)
+#5. get_box_layout() should return a string made of # characters:
+#   i. Number of rows = height
+#   ii. Number of # per row = width
+#6. If any dimension exceeds 50, return:
+#       Too big to visualize
+#7. get_items_inside(item_box) should return how many times another box can fit inside the box (no rotation)
+#8. Create a class named "StaplesBox" that inherits from Box
+#   i. Represents rigid items
+#   ii. Dimensions remain fixed
+#9. Create a class named "Namkeenbox" that inherits from Box
+#   i. Allows extra internal spacing
+#   ii. Reduces usable volume by 20%
+#10. Create a class named "FrozenFoodBox" that inherits from Box
+#   i. Uses insulated walls
+#   ii. Reduces usable volume by 30%
+#11. Each subclass should override get_volume() accordingly
+#12. Each subclass should have distinct string representation
+#---------------------------------------------------------------------------------------------------------------------------
+import math
+
+class Box:
+    def __init__(self, length, width, height):
+        self.length = length
+        self.width = width
+        self.height = height
+    
+    def set_length(self, length):
+        self.length = length
+    
+    def set_width(self, width):
+        self.width = width
+    
+    def set_height(self, height):
+        self.height = height
+    
+    def get_volume(self):
+        return self.length * self.width * self.height
+
+    def get_surface_area(self):
+        return 2 * (
+            self.length * self.width +
+            self.width * self.height + 
+            self.length * self.height
+        )
+    
+    def get_diagonal(self):
+        return math.sqrt(
+            self.length ** 2 +
+            self.width ** 2 +
+            self.height ** 2
+        )
+    
+    def get_box_layout(self):
+        if self.width > 50 or self.height > 50:
+            return "Too big to visualize."
+    
+        layout = ""
+        for _ in range(self.height):
+            layout += "#" * self.width + "\n"
+        return layout
+    
+    def get_items_inside(self, item_box):
+        if (
+            item_box.length > self.length or 
+            item_box.width > self.width or 
+            item_box.height > self.height
+        ):
+            return 0
+        
+        return (
+            (self.length // item_box.length) *
+            (self.width // item_box.width) *
+            (self.height // item_box.height)
+        )
+    
+    def __str__(self):
+        return (
+            f"Box(length={self.length}, "
+            f"width={self.width}, height={self.height})"
+        )
+
+class StaplesBox(Box):
+    def __str__(self):
+        return (
+            f"StaplesBox(length={self.length}, "
+            f"width={self.width}, height={self.height})"
+        )
+
+class NamkeenBox(Box):
+    def get_volume(self):
+        # 20% space lost due to air and cushioning
+        return super().get_volume() * 0.8
+    
+    def __str__(self):
+        return (
+            f"NamkeenBox(length={self.length}, "
+            f"width={self.width}, height={self.height})"
+        )
+
+class FrozenFoodBox(Box):
+    def get_volume(self):
+        # 30% space lost due to insulation
+        return super().get_volume() * 0.7
+    
+    def __str__(self):
+        return (
+            f"FrozenFoodBox(length={self.length}, "
+            f"width={self.width}, height={self.height})"
+        )
