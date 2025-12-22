@@ -1524,7 +1524,7 @@ for attr in dir(session):
 # Final attributes remaining:
 # - user_id: 101
 ```
-
+---
 ## 👩🏻‍🦱 Object Oriented Programming (OOP)
 ### What is OOP and how encapsulation work?
 Object Oriented Programmin or OOP is a programming style where developers treat everything in their code as real-world object. A class is like a blueprint for creating objects. Every single object created from a class has attributes that define data and methods that define the behaviors of the objects
@@ -1839,6 +1839,7 @@ Result would be:
   '_internal': 'I can be accessed from outside the class, but should not'
   '_Example__private': 'I cannot be accessed directly from outside the class'
 ```
+---
 ## 🧑🏻‍🦱 Understanding Abstraction
 ### What is Abstraction and how does it help keep complex systems organized?
 Abstraction is a process of hiding complex implementaton details and showing only the essential features of an object or system. Think of it as focusing on what something does rather than how it does it. It is not limited to Python. It is a programming concept that can be implemented in many languages that support object-oriented programming. It provides you with a simplified interface to interact with a complex system. Python implements abstraction through **ABC** module. 
@@ -1863,4 +1864,16 @@ class ConcreteClassTwo(AbstractClass):
     def abstract_method(self):
         print('Implementation in ConcreteClassTwo')
 ```
+---
+## 👨🏻‍🦱 Working with Common Data Structures
+### What is an Algorithm and how does Big O Notation work?
+Every computer program that runs on your device has a specific set of instructions, which are executed in a specific order to complete a task. The task could be sorting a set of numbers, modifying an image, tracking inventory, or even running your favorite video game. This is where algorithms come into play
+
+An **algorithm** is a set of unambiguous instructions for solving a problem or carrying out a task. They have two key characteristics:
+- They cannot continue indefinitely. They must finish in a finite number of steps
+- Each step must be precise and unambiguous
+
+They may have zero, one, or more inputs, and generate one or more outputs. The steps of an algorithm are independent from any programming language. As the process grows in size and complexity, if the algorithm is not efficient enough to handle it, you might end up with a very slow computer program that may even crash the entire system. That's why it's very important to develop and choose the most efficient algorithms possible. This is where Big O notation becomes very important. Big O notation describes the worst-case performance, or growth rate, of an algorithm as the input size increases. The growth rate of an algorithm refers to how the resources it requires increase as the input size grows. Big O notation focuses on the worst-case performance because this case is very important to understand how efficient an algorithm can be, even in the worst case scenario, regardless of the input. Big O notation will not give you an exact number to describe the algorithm's efficiency, but it will give you an idea of how it scales as the input size grows, based on the number of operations performed by the algorithm. Constant factors and lower-order terms are not taken into account to find the time complexity of an algorithm based on the number of operations. That's because as the size of **n** grows, the impact of these smaller terms in the total number of operations performed will become smaller and smaller. The term that will dominate the overall behavior of the algorithm will the term with **n**, the input size.
+
+Quadratic time complexities is one of many different types of time complexities that you can find in the world of algorithms. **0(1)** is known as "Constant Time Complexity". When an algorithm has constant time complexity, it takes the same amount of time to run, regardless of input size
 
