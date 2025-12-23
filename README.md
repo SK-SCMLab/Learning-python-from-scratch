@@ -1926,4 +1926,11 @@ In a **doubly linked list**, each node stores two references: a reference to the
 
 Singly & Doubly linked lists are essential data structres for storing and manipulating elements in a sequential order. 
 
+### How do maps, Hash maps and sets work?
+An Abstract Data Type (ADT) is a conceptual representation of a data type, including what operations can be performed on the data and the properties of that data. They are like blueprints that describe what operations can be performed, not how they are performed. They separate the interface from the actual implementation of the operations. 
 
+A **map** is an ADT that manages collections of key-value pairs and their operations in a very specific and efficient way. In a map, every value is associated with a specific key. One of the key characteristics of maps is that every key must be unique. This uniqueness allows for direct lookups, which makes the process of retrieving information much more efficient. Only keys must be unique, values can be repeated. It also defines important operations, such as inserting key-value pairs, getting the value associated with a key, updating the value associated with a key, removing a key-value pair, and checking if a key exists in the map. 
+
+A **hash map**, also known as hash table, is a concrete implementation of the map Abstract Data Type. Hash maps use a technique called "hashing" to perform common operations very efficiently. Hashing essentially works by generating a hash value for each element using a hash function. The hash value is generated based on the key of the key-value pair and it's used to calculate an index in an underlying array, the actual data structure where the key-value pairs are stored. 
+
+Python's dictionaries are implemented as hash maps behind the scenes. 
