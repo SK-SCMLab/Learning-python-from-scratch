@@ -1875,15 +1875,24 @@ An **algorithm** is a set of unambiguous instructions for solving a problem or c
 
 They may have zero, one, or more inputs, and generate one or more outputs. The steps of an algorithm are independent from any programming language. As the process grows in size and complexity, if the algorithm is not efficient enough to handle it, you might end up with a very slow computer program that may even crash the entire system. That's why it's very important to develop and choose the most efficient algorithms possible. This is where Big O notation becomes very important. Big O notation describes the worst-case performance, or growth rate, of an algorithm as the input size increases. The growth rate of an algorithm refers to how the resources it requires increase as the input size grows. Big O notation focuses on the worst-case performance because this case is very important to understand how efficient an algorithm can be, even in the worst case scenario, regardless of the input. Big O notation will not give you an exact number to describe the algorithm's efficiency, but it will give you an idea of how it scales as the input size grows, based on the number of operations performed by the algorithm. Constant factors and lower-order terms are not taken into account to find the time complexity of an algorithm based on the number of operations. That's because as the size of **n** grows, the impact of these smaller terms in the total number of operations performed will become smaller and smaller. The term that will dominate the overall behavior of the algorithm will the term with **n**, the input size.
 
-Quadratic time complexities is one of many different types of time complexities that you can find in the world of algorithms. **0(1)** is known as "Constant Time Complexity". When an algorithm has constant time complexity, it takes the same amount of time to run, regardless of input size. 
+Quadratic time complexities is one of many different types of time complexities that you can find in the world of algorithms. 
+
+**0(1)** is known as "Constant Time Complexity". When an algorithm has constant time complexity, it takes the same amount of time to run, regardless of input size. 
+
 **0(log n)** is known as "Logarithmic Time Complexity". This means that the time required by the algorithm increases slowly as the input size grows. This is common in problems in which the size of the problem is repeatedly by a constant fraction. 
+
 **0(n)** is known as "Linear Time Complexity". The running time of algorithms with this time complexity increases proportionally to the input size. 
 *Example*: **for** loop that iterates over all the elements of a list will perform more iteratoins as the number of list elements increases
+
 **0(n log n)** is known as "Log-Linear Time complexity". This is common time complexity of efficient sorting algorithms, like Merge Sort and Quick Sort
+
 **0(n²)** is known as "Quadratic Time Complexity". The running time of these algorithms increases quadratically relative to the input size, which is generally not efficient for real-world problems
 *Example*: Nested loops are a common example as the inner loop will perform **n** iterations for each one of the **n** iterations of the outer loop, resulting in **n** squared iterations
+
 **0(2^n)** denotes "Exponential Time Complexity" and **0(n!)** denotes "Factorial Time Complexity". Both are inefficient for real-world scnearios
+
 Algorithms with "Constant Space Complexity" **0(1)** always require a constant amount of memory space, even as the input gets larger. In contrast, the space required by algorithms with "Linear Space Complexity" **0(n)** increases proportionally as the input size grows. And finally, the space requirements of an algorithm with "Quadratic Space Complexity" **0(n²)** increase quadratically as the input size grows.
+
 Algorithms are the building-blocks of computer programs, with Big O notation is a powerful framework for analyzing how efficient they are, based on how their time and space requirements in the worst-case scenario as the input size grows. Understanding their efficiency is very important for developing software that works efficiently in real-world scenarios.
 
 
