@@ -1907,4 +1907,23 @@ Stacks & Queues are linear data structures that follow specific rules for adding
 
 A **stack** is a Last-In, First-Out (LIFO) data structure. This means that the last element that was added to the stack is the first one to be removed. Stacks have two ends, which we know as top and bottom. Elements are added and removed from the top of the stack. Adding an element to a stack is known as a "push" operation. Removing an element from a stack is known as "pop" operation. 
 
-A **queue** is a First-In First-Out (FIFO) linear data structure. This means that the first element added to the queue is the first one to be removed. Queues have two ends: front and back
+A **queue** is a First-In First-Out (FIFO) linear data structure. This means that the first element added to the queue is the first one to be removed. Queues have two ends: front and back. Adding an element to the back of a queue is known as an "enqueue" operation. Removing an element from the front of the queue is known as "dequeue" operation
+
+### How do Singly Linked Lists Work and how do they differ from Doubly Linked List?
+A **linked list** is a linear data structure in which each node is connected to the next node in the sequence. These connections create a data structure that looks like a chain of nodes, where each node stores data and a reference to the next node in the linked list. Linked lists are commonly used for implementing other data structures, such as stacks, queues, and deques. They can also be used to implement essential graph algorithms, such as depth-first search and breadth-first search. 
+
+**Singly Linked Lists**
+A **Singly Linked List** is a type of linked list in which each node is connected to the next node in the sequence. Each node is connected to the next one by storing a reference to it. This single reference per node allows you to traverse the linked list in one direction, from start to end. The search can only move forward, not backwards. The **head** node is the first node in the linked list. In a singly linked list, the head node is usually the only node that is directly accessible. This is where the search process will start when you're trying to find a specific node. The **tail** node is the last node. It's used to determine when the process has reached the end of the linked list. 
+
+**Inserting Nodes**
+One of the great things about linked lists is that they do not have a fixed size. They can be expanded or shrunk as needed by simply updating the connections between the nodes. You can insert a node at the start, middle, and end of a linked list. Linked list don't necessarily need to store the nodes in a specific order. The order will be determined by the connections between the nodes. However, if you do need to keep the nodes in a specific order for your particular use case, you can do so by implementing the logic in your code and the criteria you implement will determine if the node is inserted at the start, middle, or end. To insert a node at the start of the linked list, you just need to create a connection between the new node and the node that used to be the head node and make the new node the head node instead
+
+**Removing Nodes**
+To remove a node from the start, you need to update the reference to the head node, which should be the next mode in the sequence. To remove a node from the middle of the linked list, you need to update the reference of the previous node to connect it to the next node in the sequence, forming a sort of "bridge" between them
+
+**Doubly Linked Lists**
+In a **doubly linked list**, each node stores two references: a reference to the next node and a reference to the previous node in the sequence. In this type of linked list, it's also common to keep a reference to the tail node in the linked list itself to start the traversal from the end if necessary
+
+Singly & Doubly linked lists are essential data structres for storing and manipulating elements in a sequential order. 
+
+
