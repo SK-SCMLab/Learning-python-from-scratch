@@ -1907,4 +1907,4 @@ Stacks & Queues are linear data structures that follow specific rules for adding
 
 A **stack** is a Last-In, First-Out (LIFO) data structure. This means that the last element that was added to the stack is the first one to be removed. Stacks have two ends, which we know as top and bottom. Elements are added and removed from the top of the stack. Adding an element to a stack is known as a "push" operation. Removing an element from a stack is known as "pop" operation. 
 
-A **queue** is a First-In First-Out linear data structure. 
+A **queue** is a First-In First-Out (FIFO) linear data structure. This means that the first element added to the queue is the first one to be removed. Queues have two ends: front and back
