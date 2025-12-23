@@ -1895,5 +1895,16 @@ Algorithms with "Constant Space Complexity" **0(1)** always require a constant a
 
 Algorithms are the building-blocks of computer programs, with Big O notation is a powerful framework for analyzing how efficient they are, based on how their time and space requirements in the worst-case scenario as the input size grows. Understanding their efficiency is very important for developing software that works efficiently in real-world scenarios.
 
-### What are Good problem-solving techniques and ways to approach algorithmic challenges?
+### How do Dynamic Arrays differ from Static Arrays?
+Arrays are a fundamental data structure in computer science. All arrays store ordered collections of data, but depending on their type, they may work differently behind the scenes. 
 
+Static Arrays have a fixed size. They store elements in adjacent memory locations. The size is determined when the array is initialized. Once the specific block of memory is allocated, it's fixed, and cannot be changed while the program is running. This is a key characteristic of static arrays. Storing elements in adjancent memory locations makes the data retrieval process more efficient because the program can store the location of the first element and then use indices to make simple calculations and find the other elements in memory
+
+Arrays in Python are dynamic. **Dynamic Arrays** are more flexible because they can grow or shrink automatically while the program is running. They work through an automatic resizing mechanism that copies the elements into a new array when the original array is full. The process is done efficiently because the size of the new array is chosen in an efficient way that makes these computationally expensive operations less frequent. Python's built-in **list** data structure works as a dynamic array. 
+
+### How do Stacks and Queues work?
+Stacks & Queues are linear data structures that follow specific rules for adding and removing elements
+
+A **stack** is a Last-In, First-Out (LIFO) data structure. This means that the last element that was added to the stack is the first one to be removed. Stacks have two ends, which we know as top and bottom. Elements are added and removed from the top of the stack. Adding an element to a stack is known as a "push" operation. Removing an element from a stack is known as "pop" operation. 
+
+A **queue** is a First-In First-Out linear data structure. 
