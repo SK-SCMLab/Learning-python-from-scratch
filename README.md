@@ -1934,3 +1934,15 @@ A **map** is an ADT that manages collections of key-value pairs and their operat
 A **hash map**, also known as hash table, is a concrete implementation of the map Abstract Data Type. Hash maps use a technique called "hashing" to perform common operations very efficiently. Hashing essentially works by generating a hash value for each element using a hash function. The hash value is generated based on the key of the key-value pair and it's used to calculate an index in an underlying array, the actual data structure where the key-value pairs are stored. 
 
 Python's dictionaries are implemented as hash maps behind the scenes. 
+
+---
+## 🧔🏻 Algorithms
+### What is Binary Search and how does it differ from linear search
+There are two key algorithms you should know about when it comes to searching: linear search and binary search
+
+Linear search starts at the beginning of a list and iterates through each item until it finds the target value it is looking for. If the target value is found, the index where it's located in the list is returned. If the target value is not found, **-1** is returned. While it is a relatively straightforward algorithm, it is not the most efficient. If you have a large list of items, linear search can take a long time to find the target value
+            **Time complexity**: 0(n)
+            **Space complexity**: 0(1)
+Binary search is a more efficient algorithm for searching through a large list of items. The condition here is that the list must be sorted in the ascending order. Binary search works by dividing the list in half and checking if the target value is in the middle of the list. If the target value is in the middle of the list, the index of the target value is returned. Otherwise, the algorithm checks if the target value is in the left or right half of the list
+            **Time complexity**: 0(log n)
+            **Space complexity**: 0(1)
