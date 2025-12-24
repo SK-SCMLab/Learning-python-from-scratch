@@ -1,0 +1,135 @@
+#----------------------------------------------- PROBLEM STATEMENT ----------------------------------------------------
+# A dark store wants to maintain a Healthy Drinks Catalogue that includes products such as:
+#   - Fruit juices
+#   - Herbal drinks
+#   - Protein shakes
+# The catalogue should:
+#   - track available drinks
+#   - allow adding and removing drinks
+#   - group drinks by category
+#   - maintain the total count of drinks
+#   - display the catalogue in a readable format for operations staff
+#----------------------------------------------- USER STORIES --------------------------------------------------------
+#1. You should create a class named "HealthyDrink"
+#2. When a HealthyDrink object is created, it should have:
+#   i. name
+#   ii. brand
+#   iii. volume_ml
+#3. If a HealthyDrink instance is printed, it should look like:
+#   Green Juice - BrandX (250 ml)
+#4. You should create a class named "HerbalDrink" that inherits from HealthyDrink
+#5. Herbal drinks should have an additional attribute herb_type
+#6. Printing a "HerbalDrink" should look like:
+#   Tulsi Drink - BrandY (200 ml) [Herbal]
+#7. You should create a class named "ProteinDrink" that inherits from "HealthyDrink"
+#8. Protein drinks should have an additional attribute "protein_grams"
+#9. Printing a "ProteinDrink" should look like:
+#   Whey Shake - BrandZ (300 ml) [Protein: 25g]
+#10. You should create a class named "DrinkCatalogue"
+#11. It should store drinks in a list named "items"
+#12. It should track the number of drinks using a length catalogue
+#13. It should have methods:
+#   - is_empty
+#   - add
+#   - remove
+#   - get_herbal_drinks
+#   - get_protein_drinks
+#14. Printing the catalogue should:
+#   - Show empty message if no drinks exist
+#   - Display drinks grouped by category
+#--------------------------------------------------------------------------------------------------------------------------------------
+# Base drink class
+
+class HealthyDrink:
+    def __init__(self, name, brand, volume_ml):
+        self.name = name
+        self.brand = brand
+        self.volume_ml = volume_ml
+    
+    def __str__(self):
+        return f"{self.name} - {self.brand} ({self.volume_ml}ml)"
+
+# Herbal Drink
+class HerbalDrink(HealthyDrink):
+    def __init__(self, name, brand, volume_ml, herb_type):
+        super().__init__(name, brand, volume_ml)
+        self.herb_type = herb_type
+    
+    def __str__(self):
+        return (
+            f"{self.name} - {self.brand} - ({self.volume_ml}) "
+            f"[Herbal]"
+        )
+
+# Protein Drink
+class ProteinDrink(HealthyDrink):
+    def __init__(self, name, brand, volume_ml, protein_grams):
+        super().__init__(name, brand, volume_ml)
+        self.protein_grams = protein_grams
+    
+    def __str__(self):
+        return (
+            f"{self.name} - {self.brand} ({self.volume_ml}) "\
+            f"[Protein: {self.protein_grams}g]"
+        )
+    
+# Drink catalogue
+class DrinkCatalogue:
+    def __init__(self):
+        self.items = []
+        self.length = 0
+    
+    def is_empty(self):
+        return self.length == 0
+    
+    def add(self, drink):
+        self.items.append(drink)
+        self.length += 1
+    
+    def remove(self, drink_name):
+        for drink in self.items:
+            if drink.name == drink_name:
+                self.items.remove(drink)
+                self.length += 1
+                return
+    
+    def get_herbal_drinks(self):
+        return [d for d in self.items if isinstance(d, HerbalDrink)]
+    
+    def get_protein_drinks(self):
+        return [d for d in self.items if isinstance(d, ProteinDrink)]
+
+    def __str__(self):
+        if self.is_empty():
+            return "Healthy Drink Catalogue (empty)"
+        
+        result = f"Healthy Drink Catalogue ({self.length} items):\n\n"
+
+        herbal = self.get_herbal_drinks()
+        protein = self.get_protein_drinks()
+
+        if herbal:
+            result += "=== HERBAL DRINKS ===\n"
+            for i, drink in enumerate(herbal, start=1):
+                result += f"{i}. {drink}\n"
+        
+        if protein:
+            result += "=== PROTEIN DRINKS ===\n"
+            for i, drink in enumerate(protein, start=1):
+                result += f"{i}. {drink}\n"
+        
+        return result
+
+# Example Usage
+if __name__ == "__main__":
+    catalogue = DrinkCatalogue()
+
+    catalogue.add(HerbalDrink("Tulsi Water", "Ayush", 200, "Tulsi"))
+    catalogue.add(HerbalDrink("Mint Detox", "OrganicCo", 250, "Mint"))
+    catalogue.add(ProteinDrink("Whey Shake", "MuscleFuel", 300, 25))
+
+    print(catalogue)
+
+    catalogue.remove("Tulsi Water")
+    print("\nAfter removal:\n")
+    print(catalogue)
