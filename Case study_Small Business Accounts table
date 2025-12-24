@@ -1,0 +1,84 @@
+#----------------------------------------------- PROBLEM STATEMENT -------------------------------------------------
+# A small business needs a simple "Accounts Table" to manage financial accounts such as:
+#   - Cash
+#   - Sales
+#   - Expenses
+#   - Payables
+# Each account has:
+#   - An account code (string, unique)
+#   - an account name/balance (value)
+# Because multiple account codes can hash to the same index, the system must handle collisions safely
+#------------------------------------------------ USER STORIES -----------------------------------------------------
+#1. You should create a class named "AccountsTable"
+#2. When a new instance is created, it should initialize an attribute named "accounts" as an empty dicitionary
+#3. The class should have a hash method that:
+#   i. Takes a string account code
+#   ii. Returns the sume of Unicode values of its characters
+#4. The class should have an add_account method that:
+#   i. Takes account_code and account_name
+#   ii. Stores them using the hashed index
+#   iii. Handles collisions using a nested dictionary
+#5. The class should have a remove_account method that:
+#   i. Removes only the specified account
+#   ii. Does nothing if the account does not exist
+#6. The class should have a lookup_account method that:
+#   i. Takes an account code
+#   ii. Returns the account name if found
+#   iii. Returns None otherwise
+#7. Removing an account should not affect other accounts that hash to the same index
+#8. If an index becomes empty after removal, it should be deleted
+#----------------------------------------------------------------------------------------------------------------------
+
+class AccountsTable:
+    def __init__(self):
+        self.accounts = {}
+    
+    def hash(self, account_code):
+        total = 0
+        for char in account_code:
+            total += ord(char)
+        return total
+    
+    def add_account(self, account_code, account_name):
+        index = self.hash(account_code)
+
+        if index not in self.accounts:
+            self.accounts[index] = {}
+        
+        self.accounts[index][account_code] = account_name
+    
+    def remove_account(self, account_code):
+        index = self.hash(account_code)
+
+        if index not in self.accounts:
+            return
+        
+        if account_code not in self.accounts[index]:
+            return
+
+        del self.accounts[index][account_code]
+
+        if len(self.accounts[index]) == 0:
+            del self.accounts[index]
+        
+    def lookup_account(self, account_code):
+        index = self.hash(account_code)
+
+        if index not in self.accounts:
+            return None
+        
+        return self.accounts[index].get(account_code)
+
+# Example usage
+accounts = AccountsTable()
+
+accounts.add_account("CASH", "Cash Account")
+accounts.add_account("SALE", "Sales Revenue")
+accounts.add_account("EXP", "Operating Expenses")
+
+print(accounts.lookup_account("SALE")) # Sales revenue
+
+accounts.remove_account("SALE")
+print(accounts.lookup_account("SALE"))  # None
+
+print(accounts.accounts)
