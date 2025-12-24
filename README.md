@@ -1946,3 +1946,8 @@ Linear search starts at the beginning of a list and iterates through each item u
 Binary search is a more efficient algorithm for searching through a large list of items. The condition here is that the list must be sorted in the ascending order. Binary search works by dividing the list in half and checking if the target value is in the middle of the list. If the target value is in the middle of the list, the index of the target value is returned. Otherwise, the algorithm checks if the target value is in the left or right half of the list
             **Time complexity**: 0(log n)
             **Space complexity**: 0(1)
+
+### What is Divide & Conquer, and how does merge sort work?
+The Divide & Conquer paradigm is a technique for recursively breaking down problems into smaller sub problems. One of the key aspects of this technique is recursion, which happens when a function calls itself repeatedly until a base case is reached. 
+          **Time complexity**: 0(n log n)
+          **Space complexity**: 0(n)
