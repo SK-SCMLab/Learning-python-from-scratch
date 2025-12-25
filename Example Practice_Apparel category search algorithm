@@ -1,0 +1,61 @@
+#------------------------------------------------------ PROBLEM STATEMENT --------------------------------------------------------
+# An apparel platform stores sorted Apparel IDs separately for:
+#   - Men
+#   - Women
+#   - Unisex
+# You need a search algorithm that:
+#   - Searches within the correct category list
+#   - Tracks the path taken during the search
+#   - Returns:
+#       - the path of checked values
+#       - a success message with index if found
+#       - or a failure message if not found
+#------------------------------------------------------ USER STORIES -------------------------------------------------------------
+#1. You should create a function named "apparel_search"
+#2. The function should accept:
+#   - category (string: "men", "women", "unisex")
+#   - catalogue (dictionary of sorted lists)
+#   - target (item ID to search)
+#3. The function should:
+#   - Use binary-search logic
+#   - Track every middle value checked
+#4. If the value is found:
+#   - Return the path
+#   - Return a message with the index
+#5. If the value is not found:
+#   - Return an empty list
+#   - Return "Item not found"
+#---------------------------------------------------------------------------------------------------------------------------------
+def apparel_search(category, catalogue, target):
+    if category not in catalogue:
+        return [], "Invalid category"
+
+    search_list = catalogue[category]
+    path_to_target = []
+
+    low = 0
+    high = len(search_list) - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+        value_at_middle = search_list[mid]
+        path_to_target.append(value_at_middle)
+
+        if target == value_at_middle:
+            return path_to_target, f"Item found at index {mid} in {category} category"
+        elif target > value_at_middle:
+            low = mid + 1
+        else:
+            high = mid - 1
+        
+    return [], "Item not found"
+
+catalogue = {
+    "men": [101, 104, 108, 115, 120],
+    "women": [201, 205, 210, 218, 225],
+    "unisex": [301, 305, 310, 320],
+}
+
+print(apparel_search("men", catalogue, 108))
+print(apparel_search("women", catalogue, 220))
+print(apparel_search("unisex", catalogue, 305))
