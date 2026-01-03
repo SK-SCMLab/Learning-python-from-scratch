@@ -2089,3 +2089,30 @@ One of the limitation of this algorithm is that it's not always guaranteed to fi
 The algorithm visited the nodes in this order:
 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 
+### How to Matrices and Adjacency Lists work?
+There are two common ways to implement graphs in your code:
+1. Adjacency matrices
+2. Adjacency lists
+
+#### Adjacency matrices
+It is a two-dimensional list in which the rows and columns represent the graph's vertices. The values in the matrix represent the edges or connections between the nodes. The values may have different meanings depending on whether the graph is weighted or unweighted:
+- If the graph is unweighted, a value of **1** means that there is an edge connecting these nodes, while a value of **0** means there is no edge between them
+- If the graph is weighted, the value would represent the weight of the edge that connects the nodes
+
+One of the great advantages of using an adjancency matrix is that checking if there is an edge between two nodes takes constant time **0(1)**. This is because the program only needs to find that particular value in the 2D list. They have a large quadratic space requirement **0(V²)**, where V is the number of nodes in the graphs
+![Adjacency-Matrix-for-Directed-and-Unweighted-graph](https://github.com/user-attachments/assets/5ef32825-78b8-476e-a8db-54dbfe19b727)
+In adjacency matrix:
+- Each row represents a node. The first row represents node A, the second row represents node B, and so on
+- Each column represents a node too
+- Each value in the matrix represents whether there is an edge between each pair of nodes. A value of 0 means there isn't an edge connecting these nodes, while a value of 1 means there is an edge
+
+The values in the diagonal represent whether or not each node has a self-loop, an edge that connects the node to itself.
+
+#### Adjacency Lists
+It is an array or dictionary that stores all the neighbours of each node
+There are two ways to implement adjancecy lists:
+- As an array, where each index represents a node and the list stored at that index contains its neighbours
+- As a dictionary, where each key represents a node and the value associated to that key (a list) contains its neighbours
+
+They are more efficient than adjacency matrices in terms of space requirements. They have a **0(V+E)** space complexity, where V is the number of vertices (nodes) and E is the number of edges. It is less efficient for determining if there is an edge between two node
+<img width="731" height="341" alt="Graph-Representation-of-Undirected-graph-to-Adjacency-List" src="https://github.com/user-attachments/assets/c44d45a8-3319-4fbb-ad19-719f2f36a54c" />
