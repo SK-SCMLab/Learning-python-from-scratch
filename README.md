@@ -2139,3 +2139,13 @@ To understand it, first you need to understand subtrees. A subtree is a section 
 Tries are tree data structures used to store a set of strings. Tries are also known as prefix trees because they are very efficient for operations that require finding strings based on their prefixes. Each node in the trie represents a single character of a string. The root node does not represent any particular character, so you can think of it as representing an empty string. As you traverse the trie down from the root, the path to a node defines a specific prefix. To find a word, you follow that prefix until you reach the node with the word you are looking for. Nodes that represent complete words are assigned end-of-word markers.
 ![Triedatastructure1](https://github.com/user-attachments/assets/558d876b-df07-4afb-8f23-31a101861580)
 The worst-case time complexity for the search operation is O(L), where L is the length of the string that you are looking for. Insertion is also efficient. This operation only requires creating new nodes for the characters that don't exist in the trie yet. The great advantage of this data structure is that when multiple strings share the same prefix, their paths overlap, so the prefix itself is only stored once. This efficiency makes tries perfect for implementing features like autocomplete and spell checkers.
+
+### How do priority queues and heaps work?
+A priority queue is an abstract data type (ADT) that works similarly to a queue or stack, but with one key difference. They take the "priority" of the elements into account. The priority is used to determine which element should be removed next. They are very helpful for practical applications like finding the shortest path between two locations, scheduling tasks in operating systems, simulating traffic, compressing data, and managing networks
+
+A heap is a tree data structure with a very specific property called the heap property. This property determines the relationship between each node and its children, based on the type of heap.
+There are two primary types of heap:
+- Max-heap
+- Min-heap
+In max-heap, the value of each node is greater than or equal to the value of its children. In min-heap, the value of each node is less than or equal to teh value of its children. The heap property is key because it ensures that the maximum element always stays at the top, which makes it very easy to remove. Python has **heapq** built-in module for usage.
+<img width="1000" height="599" alt="MinHeapAndMaxHeap1" src="https://github.com/user-attachments/assets/81d2d9af-964d-4d56-819c-e25ae339babe" />
