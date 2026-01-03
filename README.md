@@ -1996,3 +1996,96 @@ A directed graph with no cycles
 
 #### Disconnected graph
 A graph with two or more groups of nodes that are not connected by any edges. A real-world example would be a social media network, where you have two or more groups of people who don't know each other and who have no friends in common
+
+### How do Depth First and Breadth First Search work?
+With data structures and algorithms, one of the common operations that you'll need to perform is visiting each node. This process is known as "traversing" the data structure. Traversals are used to do something with every single node in the data structure, like printing their values, finding a specific value, or performing certain operations on the nodes. Without a clear way to traverse the data structure, going through it would be like walking through a maze without a specific path to follow. That's where algorithms like Breadth-First Search (BFS) and Depth-First Search (DFS) become really important. They are commonly used to traverse graphs and for finding a path between two nodes. 
+
+#### BFS
+It is an algorithm that visits all neighbouring nodes before moving to the next level in the graph. It can be used to find the shortest path between two nodes in an unweighted graph because it analyzes all the nodes at each level, so it finds the path with fewest edges first. This algorithm is commonly implemented using a queue data structure to keep track of the nodes that have been visited. Queues follow the FIFO (First In, First Out) method, where the first node that was added to the queue is the first one to be removed. 
+The algorithm works like this:
+- You start at a specific node
+- That node is marked as visited and added to the queue
+- While the queue is not empty, the current node is removed from the queue (dequeued). Then, each one of its neighbours, if the neighbour has not been visited, it is marked as visited and added to the queue
+One important consideration is that, since BFS requires storing a queue in memory, and this queue may have a large number of nodes, the space requirements of this algorithm can be considerable. This is especially true for graphs with a large number of nodes on the same level
+
+![1*VM84VPcCQe0gSy44l9S5yA](https://github.com/user-attachments/assets/28ef4169-d919-4673-9efd-db9aea15aaff)
+**Step 1**:
+*Queue*: [1]
+*Visited*: {1}
+
+**Step 2**:
+*Queue*: [2, 3]
+*Visited*: {1, 2, 3}
+
+**Step 3**:
+*Queue*: [3 ,4, 5]
+*Visited*: {1, 2, 3, 4, 5}
+
+**Step 4**:
+*Queue*: [4, 5, 6, 7]
+*Visited*: {1, 2, 3, 4, 5, 6, 7}
+
+**Step 5**:
+*Queue*: [5, 6, 7]
+*Visited*: {1, 2, 3, 4, 5, 6, 7}
+
+**Step 6**:
+*Queue*: [6, 7]
+*Visited*: {1, 2, 3, 4, 5, 6, 7}
+
+**Step 7**:
+*Queue*: [7]
+*Visited*: {1, 2, 3, 4, 5, 6, 7}
+
+**Step 8**:
+*Queue*: []
+*Visited*: {1, 2, 3, 4, 5, 6, 7}
+
+The nodes were traversed in this order:
+
+1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
+
+#### DFS
+DFS follows each branch as deep as possible before it backtracks. It is commonly used to solve puzzles with a single solution, detecting cycles in a graph, and finding connected graph components. This algorithm can be implemented using recursion or a stack data structure to keep track of the visited nodes. Stacks follow the LIFO (Last In, First Out) method, where the last node that was added to the stack is the first one to the removed from the stack. 
+
+The algorithm works like this:
+- Start at a specific node
+- That node is marked as visited and added to the stack
+- While the stack is not empty, the current node is popped (removed). This is when we "visit" or process it (for example, by printing its value). Then, all of its unvisited neighbours are marked as visited and added to the stack.
+One of the limitation of this algorithm is that it's not always guaranteed to find the shortest path between two nodes in a unweighted graph
+
+**Step 1**:
+*Stack*: [1]
+*Vistied*: {1}
+
+**Step 2**:
+*Stack*: [5, 2]
+*Visited*: {1, 2, 3}
+
+**Step 3**:
+*Stack*: [5, 4, 3]
+*Visited*: {1, 2, 3, 4, 5}
+
+**Step 4**:
+*Stack*: [5, 4]
+*Visited*: {1, 2, 3, 4, 5}
+
+**Step 5**:
+*Stack*: [5]
+*Visited*: {1, 2, 3, 4, 5}
+
+**Step 6**:
+*Stack*: [7, 6]
+*Visited*: {1, 2, 3, 4, 5, 6, 7}
+
+**Step 7**:
+*Stack*: [7]
+*Visited*: {1, 2, 3, 4, 5, 6, 7}
+
+**Step 8**:
+*Stack*: []
+*Visited*: {1, 2, 3, 4, 5, 6, 7}
+
+The algorithm visited the nodes in this order:
+1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
+
