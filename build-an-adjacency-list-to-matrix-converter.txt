@@ -1,0 +1,23 @@
+** start of main.py **
+
+def adjacency_list_to_matrix(adj_list):
+    #Determine number of nodes
+    n = len(adj_list)
+
+    #Initialize adjacency matrix with 0s
+    matrix = [[0 for _ in range(n)] for _ in range(n)]
+
+    #Fill matrix based on adjacency list
+    for node, neighbors in adj_list.items():
+        for neighbor in neighbors:
+            matrix[node][neighbor] = 1
+    
+    #Print each row of the matrix
+    for row in matrix:
+        print(row)
+    
+    #Return the adjacency matrix
+    return matrix
+
+** end of main.py **
+
