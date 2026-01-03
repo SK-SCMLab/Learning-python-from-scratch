@@ -1951,3 +1951,10 @@ Binary search is a more efficient algorithm for searching through a large list o
 The Divide & Conquer paradigm is a technique for recursively breaking down problems into smaller sub problems. One of the key aspects of this technique is recursion, which happens when a function calls itself repeatedly until a base case is reached. 
           **Time complexity**: 0(n log n)
           **Space complexity**: 0(n)
+
+---
+## 👱🏻‍♂️ Understanding Graphs and Trees
+### What are graphs?
+Graphs are data structures used to represent the connections or relationships between objects or entities. They're often used to model networks. 
+The types of networks that you can model with a graph include social networks, transportation networks, communication networks, and even recommendation systems. 
+For example, graphs can represent connections between users on a social media platform, or connections between cities on a road network and are very versatile. A graph is often represented as a collection of points or circles connected by lines
