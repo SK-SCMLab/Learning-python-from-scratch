@@ -1960,5 +1960,39 @@ The types of networks that you can model with a graph include social networks, t
 For example, graphs can represent connections between users on a social media platform, or connections between cities on a road network and are very versatile. A graph is often represented as a collection of points or circles connected by lines. These circles are lines represent two main components of a graph: nodes & edges
 
 <img width="1536" height="1024" alt="ChatGPT Image Jan 3, 2026 at 05_42_19 PM" src="https://github.com/user-attachments/assets/c3b808e8-cf3a-4d1a-9790-7439eeb02d90" />
+**Nodes**, also known as vertices, represent the objects or entities that are part of the network modeled by the graph. They could be users, products, stations, cities, or any other entities in the model. In the above example, nodes are represented as circles and labeled with letters A, B, C, D, E to distinguish them visually
 
+**Edges** are the connections between the nodes. If two nodes are connected by an edge, that means that they're somehow connected in the network. In the above example, Node A is connected to Node B, node B is connected to nodes A, C and D and so on. The specific meaning of connection will depend on the context. It may be physical, like a real road that connects two cities, or it could be more abstract, like the connection between two users on a social media platform.
 
+If two nodes are directly connected by an edge, like nodes A and B in this example, they're known as **adjacent nodes**
+
+### Types of Graphs
+#### Undirected graphs
+<img width="1536" height="1024" alt="ChatGPT Image Jan 3, 2026 at 05_49_50 PM" src="https://github.com/user-attachments/assets/cafb3bf4-5d68-45d6-8242-3a9412bc2f7f" />
+In this, the edges don't have a specific direction. This type of edge is usually represented with a straight line between the nodes. The connection works in both directions: from node A to node B and from node B to node A. Depending on the network that is being modeled by the graph, this connection can have different meanings. 
+
+For example, if you're modeling connections between users of social media platform, this means that user A is connected to user B and user B is connected to user A. 
+
+<img width="1536" height="1024" alt="eafa7953-46ca-42d6-9bfd-dc70748c7cbd" src="https://github.com/user-attachments/assets/9ab064d0-de25-4109-b1c0-6ccd516725b9" />
+
+#### Directed graphs
+Graphs where the edges have a specific direction. The edges of the directed graph are often represented as straight lines that end with an arrow to indicate the direction. For example, if you are modeling a road network, this would be helpful to model one-way streets or roads. You can go from city A to city B through that road, but not from city B to city A 
+
+#### Vertex labeled graphs
+A graph in which each node is associated with a label or identifier in addition to its data. These labels are used to identify the nodes, represent them visually, and store additional information about them. For example, in a transportation network graph, nodes could be cities and their labels could be their names, coordinates, or any other characteristic that would be helpful for the purposes of the model
+
+#### Cyclic graphs
+<img width="1536" height="1024" alt="ChatGPT Image Jan 3, 2026 at 05_49_52 PM" src="https://github.com/user-attachments/assets/2ef70dc7-ec43-491c-9956-23cf4859f994" />
+A cycle is a path that you can follow through the edges of graph that will take you back to the initial node where you started. 
+
+#### Edge labeled graphs
+Edges are associated with labels. These labels are usually drawn next to their corresponding edges
+
+#### Weighted graphs
+A specific type of edge labeled graph in which the labels on the edges represent values that can be compared and used to perform arithmetic operations. Some edges have a higher weight, while others have a lower weight. These weights represent the "cost" of the edge
+
+#### Directed acyclic graph
+A directed graph with no cycles
+
+#### Disconnected graph
+A graph with two or more groups of nodes that are not connected by any edges. A real-world example would be a social media network, where you have two or more groups of people who don't know each other and who have no friends in common
