@@ -1959,5 +1959,6 @@ Graphs are data structures used to represent the connections or relationships be
 The types of networks that you can model with a graph include social networks, transportation networks, communication networks, and even recommendation systems. 
 For example, graphs can represent connections between users on a social media platform, or connections between cities on a road network and are very versatile. A graph is often represented as a collection of points or circles connected by lines. These circles are lines represent two main components of a graph: nodes & edges
 
-![Uploading ChatGPT Image Jan 3, 2026 at 05_42_19 PM.png…]()
+<img width="1536" height="1024" alt="ChatGPT Image Jan 3, 2026 at 05_42_19 PM" src="https://github.com/user-attachments/assets/c3b808e8-cf3a-4d1a-9790-7439eeb02d90" />
+
 
