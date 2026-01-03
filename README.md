@@ -1957,4 +1957,8 @@ The Divide & Conquer paradigm is a technique for recursively breaking down probl
 ### What are graphs?
 Graphs are data structures used to represent the connections or relationships between objects or entities. They're often used to model networks. 
 The types of networks that you can model with a graph include social networks, transportation networks, communication networks, and even recommendation systems. 
-For example, graphs can represent connections between users on a social media platform, or connections between cities on a road network and are very versatile. A graph is often represented as a collection of points or circles connected by lines
+For example, graphs can represent connections between users on a social media platform, or connections between cities on a road network and are very versatile. A graph is often represented as a collection of points or circles connected by lines. These circles are lines represent two main components of a graph: nodes & edges
+```
+https://cdn.freecodecamp.org/curriculum/lecture-transcripts/what-are-graphs-in-computer-science-1.png<img width="2656" height="1414" alt="image" src="https://github.com/user-attachments/assets/c0f72c7f-3250-44f7-bee4-23142c43f1af" />
+```
+
