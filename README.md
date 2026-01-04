@@ -2149,3 +2149,18 @@ There are two primary types of heap:
 - Min-heap
 In max-heap, the value of each node is greater than or equal to the value of its children. In min-heap, the value of each node is less than or equal to teh value of its children. The heap property is key because it ensures that the maximum element always stays at the top, which makes it very easy to remove. Python has **heapq** built-in module for usage.
 <img width="1000" height="599" alt="MinHeapAndMaxHeap1" src="https://github.com/user-attachments/assets/81d2d9af-964d-4d56-819c-e25ae339babe" />
+
+---
+## 🧑🏻‍🦳 What is Dynamic Programming and what are some common algorithms?
+Dynamic Programming is an algorithmic technique that solves complex problems by breaking them into simpler subproblems and storing the results to avoid redundant calculations. This approach transforms problems that would normally take exponential time into ones that can be solved in polynomial time. 
+
+It works when two key conditions are present in a problem:
+- **Overlapping subproblems**: The same smaller problems appear multiple times when solving the larger problem. Instead of recalculating these subproblems repeatedly, we store their solutions
+- **Optimal substructure**: The optimal solution to the problem contains optimal solutions to its subproblems. This means we can build up the best solution by combining the best solutions to smaller parts
+
+It eliminates redundant computation through two main approaches.
+### Memoization (Top-Down approach)
+Memoization stores results of expensive function calls and returns the cached result when the same inputs occur again. It is so much more efficient because each unique value from 1 to n is calculated exactly once. 
+
+### Tabulation (Bottom-up approach)
+Tabulation builds the solution from the ground up, filling a table with solutions to subproblems. It eliminates recursion entirely by building the solution iteratively from the smallest subproblems up to the target
