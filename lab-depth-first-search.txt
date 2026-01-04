@@ -1,0 +1,21 @@
+** start of main.py **
+
+def dfs(matrix, start):
+    n = len(matrix)
+    visited = [False] * n
+    result = []
+
+    def dfs_visit(node):
+        visited[node] = True
+        result.append(node)
+    
+        # Visit neighbors in reverse order:
+        for neighbor in range(n - 1, -1, -1):
+            if matrix[node][neighbor] == 1 and not visited[neighbor]:
+                dfs_visit(neighbor)
+    
+    dfs_visit(start)
+    return result
+
+** end of main.py **
+
