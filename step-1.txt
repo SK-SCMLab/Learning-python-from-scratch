@@ -1,0 +1,42 @@
+** start of main.py **
+
+def dfs_n_queens(n):
+    # Requirement 2
+    if n < 1:
+        return []
+    
+    solutions = []
+
+    # cols[i] = column index of queen in row i
+    cols = [-1] * n
+
+    def is_safe(row, col):
+        # Check previous rows
+        for r in range(row):
+            c = cols[r]
+            # Same column
+            if c == col:
+                return False
+            # Same diagonal
+            if abs(c - col) == abs(r - row):
+                return False
+        return True
+    
+    def dfs(row):
+        # 3. When row == n, we have a complete solution
+        if row == n:
+            solutions.append(cols.copy())
+            return
+        
+        # Try all columns in this row
+        for col in range(n):
+            if is_safe(row, col):
+                cols[row] = col
+                dfs(row + 1)
+                cols[row] = -1  #backtrack
+    
+    dfs(0)
+    return solutions
+
+** end of main.py **
+
